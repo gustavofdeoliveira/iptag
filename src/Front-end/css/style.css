@@ -1,4 +1,72 @@
-body{
+:root {
+    --blue-100: #005B8E;
+    --blue-0: #00BBE7;
+    --white: #fff;
+    --gray-100: #6C6D6F;
+    --gray-0: #F2F2F2;
+    --black: #373D43;
+    --green-0: #D1E7DD;
+    --green-100: #0F5132;
+    --red-0: #F8D7DA;
+    --red-100: #932029;
+    --orange-0: #F8E5D7;
+
+}
+
+@font-face {
+    font-family: "Montserrat";
+    src: url(../fonts/Montserrat-Regular.ttf);
+}
+
+@font-face {
+    font-family: "Montserrat-Bold";
+    src: url(../fonts/Montserrat-Bold.ttf);
+}
+
+@font-face {
+    font-family: "Ubuntu";
+    src: url(../fonts/Ubuntu-Regular.ttf);
+}
+
+@font-face {
+    font-family: "Ubuntu-Bold";
+    src: url(../fonts/Ubuntu-Bold.ttf);
+}
+
+body {
     width: 100%;
     height: 100%;
+
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: "Ubuntu-Bold";
+}
+
+p {
+    font-family: "Montserrat";
+}
+
+.contaner {
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    width: 100%;
+    padding-right: calc(var(--bs-gutter-x) * .5);
+    padding-left: calc(var(--bs-gutter-x) * .5);
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#white-background {
+    background-color: var(--white);
+    max-height: 100%;
+    height: 100%;
+    min-height: 500px;
+}
+
+#blue-background {
+    max-height: 100%;
+    height: 100%;
+    min-height: 500px;
+    background: linear-gradient(90deg, var(--blue-100) 0%, var(--blue-0) 100%);
 }
