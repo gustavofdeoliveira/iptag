@@ -31,26 +31,34 @@
 
 
 <body style="display: flex;" id="body-pd">
-
+  <header class="header" id="header">
+    <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
+    <div class="d-flex align-items-center"> <img class="img-navbar" src="../images/avatar.png">
+    <div class="dropdown">
+      <a class="dropdown-navbar dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Usuário
+      </a>
+      <div class="dropdown-menu dropdown-right" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="#"> Meu perfil</a>
+        <a class="dropdown-item" href="#">Sair <i class="fa fa-sign-out" aria-hidden="true"></i></a>
+      </div>
+    </div>
+  </div>
+  </header>
   <div class="l-navbar" id="nav-bar">
     <nav class="nav">
       <div>
-        <div class="header" id="header">
-          <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
-        </div>
+        
         <a href="#" class="nav_logo">
           <img class="logo-white" src="../images/logo-ipt-white.png">
           <span class="nav-logo-name">IPTag</span>
         </a>
         <div class="nav_list">
-          <a href="#" class="nav_link active">
+          <a href="#" class="nav_link">
             <i class='bx bx-grid-alt nav_icon'></i>
             <span class="nav_name">Dashboard</span>
           </a>
-          <a href="#" class="nav_link">
-            <i class='bx bx-user-circle nav_icon'></i>
-            <span class="nav_name">Perfil</span>
-          </a>
+
           <a href="#" class="nav_link">
             <i class='bx bx-bell nav_icon'></i>
             <span class="nav_name">Notificações</span>
@@ -59,7 +67,7 @@
             <i class='bx bx-search nav_icon'></i>
             <span class="nav_name">Buscar</span>
           </a>
-          <a href="#" class="nav_link">
+          <a href="#" class="nav_link active">
             <i class='bx bx-mobile nav_icon'></i>
             <span class="nav_name">Dispositivos</span>
           </a>
@@ -70,8 +78,6 @@
 
         </div>
       </div>
-      <a href="#" class="nav_link">
-        <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">SignOut</span> </a>
     </nav>
   </div>
   <!--Container Main start-->
@@ -184,6 +190,9 @@
   <!--Container Main end-->
 
 </body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 <script type='text/javascript'
   src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js'></script>
 <script type='text/javascript' src='../js/scripts.js'></script>

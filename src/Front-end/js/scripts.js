@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         if (toggle && nav && bodypd && headerpd) {
             toggle.addEventListener('click', () => {
                 // show navbar
-                nav.classList.toggle('show')
+                nav.classList.toggle('showw')
                 // change icon
                 toggle.classList.toggle('bx-x')
                 // add padding to body
@@ -59,4 +59,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
     linkColor.forEach(l => l.addEventListener('click', colorLink))
 
     // Your code to run since DOM is loaded and ready
+});
+
+var $input    = document.getElementById('image'),
+    $fileName = document.getElementById('image-name');
+
+$input.addEventListener('change', function(){
+  $fileName.textContent = this.value;
 });
