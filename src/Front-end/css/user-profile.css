@@ -1,0 +1,24 @@
+.name{
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.profile-infos{
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.profile-infos p{
+    margin: 0;
+}
+
+.profile-infos a{
+    display: flex;
+    align-items: center;
+}
+
+#carteira{
+    text-align: center;
+    margin: 10px;
+}
