@@ -301,6 +301,32 @@ p {
     width: 80px;
 }
 
+.name {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.profile-infos {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.profile-infos p {
+    margin: 0;
+}
+
+.profile-infos a {
+    display: flex;
+    align-items: center;
+}
+
+#carteira {
+    text-align: center;
+    margin: 10px;
+    overflow-wrap: break-word;
+}
+
 @keyframes is-rotating {
     to {
         transform: rotate(1turn);
@@ -316,19 +342,28 @@ p {
     border-radius: 24px;
     color: var(--black);
 }
+
 .input-file:hover {
     border: 2px solid var(--blue-100);
     background-color: var(--blue-100);
     color: var(--white);
 }
-.input-file-name{
+
+.input-file-name {
     text-align: center;
     font-family: "Montserrat";
     color: var(--black);
     padding: 8px;
 }
+
 input[type='file'] {
     display: none
+}
+
+.fa-pencil-square-o {
+    color: var(--black);
+    font-size: 25px;
+    margin-right: 0 !important;
 }
 
 @media (max-width: 576px) {
@@ -344,6 +379,7 @@ input[type='file'] {
     body {
         margin: var(--header-height) 0 0 0 !important;
     }
+
     .body-pd {
         padding-left: calc(var(--nav-width) + 1rem) !important;
     }
