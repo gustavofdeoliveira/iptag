@@ -1,386 +1,455 @@
 :root {
-    --blue-100: #005B8E;
-    --blue-0: #00BBE7;
-    --white: #fff;
-    --gray-100: #6C6D6F;
-    --gray-0: #F2F2F2;
-    --black: #373D43;
-    --green-0: #D1E7DD;
-    --green-100: #0F5132;
-    --red-0: #F8D7DA;
-    --red-100: #932029;
-    --orange-0: #F8E5D7;
-    --white-glass-100: rgba(255, 255, 255, 0.4);
-    --white-glass-0: rgba(255, 255, 255, 0.1);
-    --shadow: rgba(0, 0, 0, 0.25);
+  --blue-100: #005b8e;
+  --blue-0: #00bbe7;
+  --white: #fff;
+  --gray-100: #6c6d6f;
+  --gray-0: #f2f2f2;
+  --black: #373d43;
+  --green-0: #d1e7dd;
+  --green-100: #0f5132;
+  --red-0: #f8d7da;
+  --red-100: #932029;
+  --orange-0: #f8e5d7;
+  --white-glass-100: rgba(255, 255, 255, 0.4);
+  --white-glass-0: rgba(255, 255, 255, 0.1);
+  --shadow: rgba(0, 0, 0, 0.25);
 }
 
 @font-face {
-    font-family: "Montserrat";
-    src: url(../fonts/Montserrat-Regular.ttf);
+  font-family: "Montserrat";
+  src: url(../fonts/Montserrat-Regular.ttf);
 }
 
 @font-face {
-    font-family: "Montserrat-Bold";
-    src: url(../fonts/Montserrat-Bold.ttf);
+  font-family: "Montserrat-Bold";
+  src: url(../fonts/Montserrat-Bold.ttf);
 }
 
 @font-face {
-    font-family: "Ubuntu";
-    src: url(../fonts/Ubuntu-Regular.ttf);
+  font-family: "Ubuntu";
+  src: url(../fonts/Ubuntu-Regular.ttf);
 }
 
 @font-face {
-    font-family: "Ubuntu-Bold";
-    src: url(../fonts/Ubuntu-Bold.ttf);
+  font-family: "Ubuntu-Bold";
+  src: url(../fonts/Ubuntu-Bold.ttf);
 }
 
 body {
-    width: 100%;
-    height: 100%;
-    min-height: 100vh;
-
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
 }
 
-h1, h2, h3, h4, h5 {
-    font-family: "Ubuntu-Bold";
-    color: var(--black);
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Ubuntu-Bold";
+  color: var(--black);
 }
 
 p {
-    font-family: "Montserrat";
-    color: var(--black);
+  font-family: "Montserrat";
+  color: var(--black);
 }
 
 .contaner {
-    --bs-gutter-x: 1.5rem;
-    --bs-gutter-y: 0;
-    width: 100%;
-    padding-right: calc(var(--bs-gutter-x) * .5);
-    padding-left: calc(var(--bs-gutter-x) * .5);
-    margin-right: auto;
-    margin-left: auto;
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 0;
+  width: 100%;
+  padding-right: calc(var(--bs-gutter-x) * 0.5);
+  padding-left: calc(var(--bs-gutter-x) * 0.5);
+  margin-right: auto;
+  margin-left: auto;
 }
 
 #white-background {
-    background-color: var(--white);
-    max-height: 100%;
-    height: 100%;
-    min-height: 100vh;
-    padding: 16px;
+  background-color: var(--white);
+  max-height: 100%;
+  height: 100%;
+  min-height: 100vh;
+  padding: 16px;
 }
 
 #blue-background {
-    max-height: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, var(--blue-100) 0%, var(--blue-0) 100%);
-    min-height: 100vh;
-    padding: 16px;
-    backdrop-filter: blur(8px);
+  max-height: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--blue-100) 0%, var(--blue-0) 100%);
+  min-height: 100vh;
+  padding: 16px;
+  backdrop-filter: blur(8px);
 }
 
 .title {
-    text-align: center;
+  text-align: center;
 }
 
 .glass {
-    width: 100%;
-    height: 100%;
-    border: 1px solid var(--white);
-    min-height: 94.5vh;
-    border-radius: 16px;
-    backdrop-filter: blur(4px);
-    background: linear-gradient(-180deg, var(--white-glass-100), var(--white-glass-0) 100%);
-    filter: drop-shadow(0px 4px 4px var(--shadow));
-
+  width: 100%;
+  height: 100%;
+  border: 1px solid var(--white);
+  min-height: 94.5vh;
+  border-radius: 16px;
+  backdrop-filter: blur(4px);
+  background: linear-gradient(
+    -180deg,
+    var(--white-glass-100),
+    var(--white-glass-0) 100%
+  );
+  filter: drop-shadow(0px 4px 4px var(--shadow));
 }
 
 .logo-ipt-dark {
-    max-width: 300px;
-
-
+  max-width: 300px;
 }
 
 .welcome-text {
-    color: var(--blue-0);
-    font-size: 22px;
-    font-family: "Montserrat-Bold";
-    text-align: center;
+  color: var(--blue-0);
+  font-size: 22px;
+  font-family: "Montserrat-Bold";
+  text-align: center;
 }
 
 .welcome-describe {
-    font-size: 18px;
-    text-align: center;
-
+  font-size: 18px;
+  text-align: center;
 }
 
 .link-metamask {
-    font-family: "Montserrat";
-    color: var(--blue-100);
-    text-decoration: none;
+  font-family: "Montserrat";
+  color: var(--blue-100);
+  text-decoration: none;
 }
 
 .link-metamask:hover {
-    color: var(--blue-0);
+  color: var(--blue-0);
 }
 
 .btn-white {
-    font-family: "Montserrat-Bold";
-    background-color: var(--white);
-    border: 2px solid var(--blue-0) !important;
-    border-radius: 32px;
-    color: var(--black);
-    height: min-content;
-    padding: 8px;
-    width: 100%;
-    max-width: 330px;
+  font-family: "Montserrat-Bold";
+  background-color: var(--white);
+  border: 2px solid var(--blue-0) !important;
+  border-radius: 32px;
+  color: var(--black);
+  height: min-content;
+  padding: 8px;
+  width: 100%;
+  max-width: 330px;
 }
 
 .btn-white:hover {
-    font-family: "Montserrat-Bold";
-    background-color: var(--blue-0);
-    border-radius: 2px;
-    color: var(--white);
-    border-radius: 32px;
-    color: var(--black);
-    height: min-content;
-    padding: 8px;
-    width: 100%;
-    max-width: 330px;
-
+  font-family: "Montserrat-Bold";
+  background-color: var(--blue-0);
+  border-radius: 2px;
+  color: var(--white);
+  border-radius: 32px;
+  color: var(--black);
+  height: min-content;
+  padding: 8px;
+  width: 100%;
+  max-width: 330px;
 }
 
 .btn-white-blue {
-    font-family: "Montserrat-Bold";
-    background-color: var(--white);
-    border: 2px solid var(--blue-100) !important;
-    border-radius: 32px;
-    color: var(--black);
-    height: min-content;
-    padding: 8px;
-    width: 100%;
-    max-width: 330px;
+  font-family: "Montserrat-Bold";
+  background-color: var(--white);
+  border: 2px solid var(--blue-100) !important;
+  border-radius: 32px;
+  color: var(--black);
+  height: min-content;
+  padding: 8px;
+  width: 100%;
+  max-width: 330px;
 }
 
 .btn-white-blue:hover {
-    font-family: "Montserrat-Bold";
-    background-color: var(--blue-100);
-    border-radius: 2px;
-    color: var(--white);
-    border-radius: 32px;
-    height: min-content;
-    padding: 8px;
-    width: 100%;
-    max-width: 330px;
-
+  font-family: "Montserrat-Bold";
+  background-color: var(--blue-100);
+  border-radius: 2px;
+  color: var(--white);
+  border-radius: 32px;
+  height: min-content;
+  padding: 8px;
+  width: 100%;
+  max-width: 330px;
 }
 
 .btn-blue {
-    font-family: "Montserrat-Bold";
-    background-color: var(--blue-0);
-    border-radius: 32px;
-    color: var(--white);
-    border: 2px solid var(--blue-0) !important;
-    height: min-content;
-    padding: 8px;
-    width: 100%;
-    max-width: 330px;
+  font-family: "Montserrat-Bold";
+  background-color: var(--blue-0);
+  border-radius: 32px;
+  color: var(--white);
+  border: 2px solid var(--blue-0) !important;
+  height: min-content;
+  padding: 8px;
+  width: 100%;
+  max-width: 330px;
 }
 
 .btn-blue:hover {
-    font-family: "Montserrat-Bold";
-    background-color: var(--blue-100);
-    border-radius: 2px;
-    color: var(--white);
-    border-radius: 32px;
-    border: 2px solid var(--blue-100) !important;
-    height: min-content;
-    padding: 8px;
-    width: 100%;
-    max-width: 330px;
-
+  font-family: "Montserrat-Bold";
+  background-color: var(--blue-100);
+  border-radius: 2px;
+  color: var(--white);
+  border-radius: 32px;
+  border: 2px solid var(--blue-100) !important;
+  height: min-content;
+  padding: 8px;
+  width: 100%;
+  max-width: 330px;
 }
 
 .fa {
-    font-size: 20px;
-    margin-right: 8px;
+  font-size: 20px;
+  margin-right: 8px;
 }
 
 .icon-metamask {
-    width: 30px;
-    margin-right: 8px;
+  width: 30px;
+  margin-right: 8px;
 }
 
 .white-card {
-    background-color: var(--white);
-    padding: 16px;
-    border: 1px solid var(--gray-0);
-    border-radius: 8px;
-    filter: drop-shadow(0px 4px 8px var(--shadow));
-    min-height: max-content;
-    height: 100%;
-    display: block;
+  background-color: var(--white);
+  padding: 16px;
+  border: 1px solid var(--gray-0);
+  border-radius: 8px;
+  filter: drop-shadow(0px 4px 8px var(--shadow));
+  min-height: max-content;
+  height: 100%;
+  display: block;
 }
 
 .white-card-title {
-    font-family: "Montserrat-Bold";
+  font-family: "Montserrat-Bold";
 }
 
 .white-card-percent {
-    font-family: "Montserrat";
-    font-size: 24px;
-    padding: 8px;
-    border-radius: 8px;
-    width: min-content;
-    height: max-content;
+  font-family: "Montserrat";
+  font-size: 24px;
+  padding: 8px;
+  border-radius: 8px;
+  width: min-content;
+  height: max-content;
 }
 
 .image-white-card {
-    max-width: 180px;
-    width: 100%;
+  max-width: 180px;
+  width: 100%;
 }
 
 .white-card-input {
-    border-radius: 0px !important;
-    border: none;
-    border-bottom: 1px solid var(--blue-100) !important;
-    width: 100%;
-    font-family: "Montserrat";
-    font-size: 16px;
-    color: var(--black);
-    padding: 8px;
+  border-radius: 0px !important;
+  border: none;
+  border-bottom: 1px solid var(--blue-100) !important;
+  width: 100%;
+  font-family: "Montserrat";
+  font-size: 16px;
+  color: var(--black);
+  padding: 8px;
 }
 
 #option {
-    background-color: var(--white) !important;
-    padding: 8px !important;
-    color: var(--black);
-
+  background-color: var(--white) !important;
+  padding: 8px !important;
+  color: var(--black);
 }
 
 .white-card-input::placeholder {
-    font-family: "Montserrat";
-    font-size: 16px;
-    color: var(--black);
+  font-family: "Montserrat";
+  font-size: 16px;
+  color: var(--black);
 }
 
 .green-percent {
-    background-color: var(--green-0);
+  background-color: var(--green-0);
 }
 
 .red-percent {
-    background-color: var(--red-0);
+  background-color: var(--red-0);
 }
 
 .graphic-white-card {
-    margin-top: -20px;
+  margin-top: -20px;
 }
 
 #graphic-white-card {
-    width: min-content;
-    height: min-content;
-    margin-left: auto;
-    margin-right: auto;
+  width: min-content;
+  height: min-content;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .container-background {
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    height: 100%;
-    background-color: var(--white);
-    display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  height: 100%;
+  background-color: var(--white);
+  display: flex;
 }
 
 .loader {
-    animation: is-rotating 1s infinite;
-    border: 6px solid #e5e5e5;
-    border-radius: 50%;
-    border-top-color: var(--blue-100);
-    height: 80px;
-    width: 80px;
+  animation: is-rotating 1s infinite;
+  border: 6px solid #e5e5e5;
+  border-radius: 50%;
+  border-top-color: var(--blue-100);
+  height: 80px;
+  width: 80px;
 }
 
 .name {
-    font-weight: bold;
-    font-size: 24px;
+  font-weight: bold;
+  font-size: 24px;
 }
 
 .profile-infos {
-    display: flex;
-    justify-content: space-between;
-
+  display: flex;
+  justify-content: space-between;
 }
 
 .profile-infos p {
-    margin: 0;
+  margin: 0;
 }
 
 .profile-infos a {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 #carteira {
-    text-align: center;
-    margin: 10px;
-    overflow-wrap: break-word;
+  text-align: center;
+  margin: 10px;
+  overflow-wrap: break-word;
 }
 
 @keyframes is-rotating {
-    to {
-        transform: rotate(1turn);
-    }
+  to {
+    transform: rotate(1turn);
+  }
 }
 
 .input-file {
-    border: 2px solid var(--blue-100);
-    width: max-content;
-    font-size: 12px;
-    font-family: "Montserrat-Bold";
-    padding: 8px !important;
-    border-radius: 24px;
-    color: var(--black);
+  border: 2px solid var(--blue-100);
+  width: max-content;
+  font-size: 12px;
+  font-family: "Montserrat-Bold";
+  padding: 8px !important;
+  border-radius: 24px;
+  color: var(--black);
 }
 
 .input-file:hover {
-    border: 2px solid var(--blue-100);
-    background-color: var(--blue-100);
-    color: var(--white);
+  border: 2px solid var(--blue-100);
+  background-color: var(--blue-100);
+  color: var(--white);
 }
 
 .input-file-name {
-    text-align: center;
-    font-family: "Montserrat";
-    color: var(--black);
-    padding: 8px;
+  text-align: center;
+  font-family: "Montserrat";
+  color: var(--black);
+  padding: 8px;
 }
 
-input[type='file'] {
-    display: none
+input[type="file"] {
+  display: none;
 }
 
 .fa-pencil-square-o {
-    color: var(--black);
-    font-size: 25px;
-    margin-right: 0 !important;
+  color: var(--black);
+  font-size: 25px;
+  margin-right: 0 !important;
 }
 
 @media (max-width: 576px) {
-    .d-sm-none {
-        display: none !important;
-    }
+  .d-sm-none {
+    display: none !important;
+  }
 
-    .header {
-        padding: 0 1em !important;
+  .header {
+    padding: 0 1em !important;
+  }
 
-    }
+  body {
+    margin: var(--header-height) 0 0 0 !important;
+  }
 
-    body {
-        margin: var(--header-height) 0 0 0 !important;
-    }
-
-    .body-pd {
-        padding-left: calc(var(--nav-width) + 1rem) !important;
-    }
+  .body-pd {
+    padding-left: calc(var(--nav-width) + 1rem) !important;
+  }
 }
+
+/* Visualizar dispositivos */
+
+.image-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.no-margin {
+  margin: 0;
+}
+
+.device-infos-subtiles {
+  font-size: 18px;
+}
+
+.location-card {
+  margin-top: 15px;
+}
+
+.infos-aside-bx {
+  display: flex;
+  flex-direction: row;
+}
+
+.infos-aside-bx p:first-of-type {
+  margin-right: 20px;
+}
+
+.btns-container {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 16px;
+}
+
+.btns-container a {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  gap: 8px;
+  width: 260.5px;
+  height: 39px;
+  border-radius: 16px;
+}
+
+.tracking-btn {
+  background: var(--blue-0);
+  color: var(--white);
+  transition: 200ms;
+}
+
+.tracking-btn:hover {
+  background: var(--blue-100);
+  color: var(--white);
+}
+
+.ringing-btn {
+  font-weight: 400 !important;
+  border: 2px solid var(--blue-100);
+  color: var(--black);
+  transition: 200ms;
+}
+
+.ringing-btn:hover {
+  background: var(--blue-100);
+  color: var(--white);
+}
+
+/* Final do Visualizar dispositivos */
