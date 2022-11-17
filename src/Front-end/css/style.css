@@ -93,11 +93,9 @@ p {
   min-height: 94.5vh;
   border-radius: 16px;
   backdrop-filter: blur(4px);
-  background: linear-gradient(
-    -180deg,
-    var(--white-glass-100),
-    var(--white-glass-0) 100%
-  );
+  background: linear-gradient(-180deg,
+      var(--white-glass-100),
+      var(--white-glass-0) 100%);
   filter: drop-shadow(0px 4px 4px var(--shadow));
 }
 
@@ -453,3 +451,107 @@ input[type="file"] {
 }
 
 /* Final do Visualizar dispositivos */
+.white-card-img-device {
+  width: max-content;
+  max-height: 40px;
+
+}
+
+.white-card-name-device {
+  font-size: 16px;
+  font-family: "Montserrat-Bold";
+  text-decoration: none;
+  color: var(--black);
+  margin-left: 8px;
+}
+
+.white-card-nickname-device {
+  font-size: 12px;
+  text-decoration: none;
+  color: var(--black);
+  margin-left: 8px;
+}
+
+.square-green {
+  background-color: var(--green-0);
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  display: block;
+}
+
+.square-orange {
+  background-color: var(--orange-0);
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  display: block;
+}
+
+.square-red {
+  background-color: var(--red-0);
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  display: block;
+}
+
+.white-card-label-device {
+  font-family: "Montserrat";
+  font-size: 12px;
+  background-color: var(--gray-0);
+  border-radius: 8px;
+  padding: 8px;
+  width: max-content;
+  margin-left: 8px;
+  color: var(--black);
+}
+
+.white-card-time-device {
+  font-family: "Montserrat";
+  font-size: 12px;
+  color: var(--black);
+  width: max-content;
+
+}
+
+.white-card-see-device {
+  font-family: "Montserrat";
+  font-size: 14px;
+  color: var(--black);
+  width: max-content;
+}
+
+.white-card-see-device:hover {
+  text-decoration: underline;
+  color: var(--black);
+}
+
+.white-card-see-arrow-device {
+  width: 12px;
+  height: 12px;
+  margin-left: 8px;
+}
+
+.w-max {
+  width: max-content;
+}
+
+.arrows-pagination {
+  width: 12px;
+  margin-left: 16px;
+}
+
+.numbers-pagination {
+  font-family: "Montserrat";
+  font-size: 16px;
+  color: var(--black);
+  margin-left: 16px;
+}
+
+.selected {
+  font-family: "Montserrat-Bold";
+  font-size: 16px;
+  color: var(--black);
+  text-decoration: underline;
+}
