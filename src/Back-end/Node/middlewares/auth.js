@@ -8,7 +8,8 @@ const verifyToken = async (req, res, next) => {
     return res.status(403).send("A token is required for authentication");
   }
   try {
-    await jwt.verify(token, process.env.JWT_SECRET);
+    const { name } = await jwt.verify(token, process.env.JWT_SECRET);
+    req.userId = name;
     next();
   } catch (err) {
     return res.status(401).send("Invalid Token");

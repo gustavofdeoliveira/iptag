@@ -9,14 +9,27 @@ const userAuth = require("../middlewares/auth");
 //ROTAS com seus respectivos controllers e middlewares
 
 router.post(
-  "/createUser",
+  "/create",
   [body("nome", "nome é necessário").exists({ checkFalsy: true })],
   [body("setor", "setor é necessário").exists({ checkFalsy: true })],
   [body("cargo", "cargo é necessário").exists({ checkFalsy: true })],
+  [body("email", "email é necessário").exists({ checkFalsy: true })],
   [body("senha", "senha é necessária").exists({ checkFalsy: true })],
-  userController.verifyToken,
-  inteliController.rewardStudent
+  userController.createUser
 );
+
+router.post(
+  "/login",
+  [body("email", "email é necessário").exists({ checkFalsy: true })],
+  [body("senha", "senha é necessária").exists({ checkFalsy: true })],
+  userController.login
+);
+
+router.get("/get", userAuth, userController.getUser);
+
+router.put("/update", userAuth, userController.updateUser);
+
+router.delete("/delete", userAuth, userController.deleteUser);
 
 //Exporta o ROUTER
 module.exports = router;
