@@ -19,19 +19,19 @@ const PORT = process.env.PORT || 3001;
 
 const userRouter = require("./routes/user");
 app.use("/user", userRouter);
-app.use(express.static("../../Front-end"))
-app.use((err, req, res, next) => {    
-    if (err instanceof Error) {
-        console.log()
-        res.status(500).json({
-            error: err.message
-        })
-    } else {
-        return res.status(500).json({
-            status: 500,
-            message: "Internal Server Error"
-        })
-    }    
+app.use(express.static("../../Front-end"));
+app.use((err, req, res, next) => {
+  if (err instanceof Error) {
+    console.log();
+    res.status(500).json({
+      error: err.message,
+    });
+  } else {
+    return res.status(500).json({
+      status: 500,
+      message: "Internal Server Error",
+    });
+  }
 });
 
 app.listen(PORT, () => {

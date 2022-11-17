@@ -26,6 +26,7 @@ router.post(
 );
 
 router.get("/get", userAuth, userController.getUser);
+
 router.get("/getUsers", userAuth, userController.getUsers);
 
 router.put("/update", userAuth, userController.updateUser);

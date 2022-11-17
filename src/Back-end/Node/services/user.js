@@ -2,9 +2,9 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const dbInstance = require("../database");
 require("dotenv").config();
-const sqlite3 = require('sqlite3').verbose();
-const sqlite = require('sqlite')
-const { open } = require('sqlite')
+const sqlite3 = require("sqlite3").verbose();
+const sqlite = require("sqlite");
+const { open } = require("sqlite");
 class User {
   constructor(nome, setor, cargo, email, senha) {
     this.name = nome;
@@ -12,13 +12,14 @@ class User {
     this.role = cargo;
     this.email = email;
     this.password = senha;
-
   }
-
 
   async createUser() {
     // Pegando a instancia do db
-    const db = await sqlite.open({ filename: './database/database.db', driver: sqlite3.Database });
+    const db = await sqlite.open({
+      filename: "./database/database.db",
+      driver: sqlite3.Database,
+    });
 
     // Pegando todos os usuários que possuem o email que o usuário informou
     const rowsEmailUser = await db.all(
@@ -67,7 +68,10 @@ class User {
     let passwordMatch;
     let token;
 
-    const db = await sqlite.open({ filename: './database/database.db', driver: sqlite3.Database });
+    const db = await sqlite.open({
+      filename: "./database/database.db",
+      driver: sqlite3.Database,
+    });
 
     const password = await db.get(
       `SELECT * FROM users WHERE email='${emailAuth}'`
@@ -107,7 +111,10 @@ class User {
 
   async getUser(userId) {
     // Pegando a instancia do db
-    const db = await sqlite.open({ filename: './database/database.db', driver: sqlite3.Database });
+    const db = await sqlite.open({
+      filename: "./database/database.db",
+      driver: sqlite3.Database,
+    });
 
     const userInfo = await db.get(
       `SELECT * \ FROM users \ WHERE id = "${userId}"`
@@ -131,11 +138,12 @@ class User {
 
   async getUsers() {
     // Pegando a instancia do db
-    const db = await sqlite.open({ filename: './database/database.db', driver: sqlite3.Database });
+    const db = await sqlite.open({
+      filename: "./database/database.db",
+      driver: sqlite3.Database,
+    });
 
-    const userInfo = await db.get(
-      `SELECT * \ FROM users \ ORDER BY id DESC`
-    );
+    const userInfo = await db.all(`SELECT * \ FROM users \ ORDER BY id DESC`);
 
     if (!userInfo) {
       const error = {
@@ -155,7 +163,10 @@ class User {
 
   async editUser(userId, nome, setor, cargo, email) {
     // Pegando a instancia do db
-    const db = await sqlite.open({ filename: './database/database.db', driver: sqlite3.Database });
+    const db = await sqlite.open({
+      filename: "./database/database.db",
+      driver: sqlite3.Database,
+    });
 
     let queryComponent = [];
 
@@ -181,13 +192,13 @@ class User {
       queryComponent.push(`name="${nome}"`);
     }
     if (setor) {
-      queryComponent.push(`name="${setor}"`);
+      queryComponent.push(`setor="${setor}"`);
     }
     if (cargo) {
-      queryComponent.push(`name="${cargo}"`);
+      queryComponent.push(`cargo="${cargo}"`);
     }
     if (email) {
-      queryComponent.push(`name="${email}"`);
+      queryComponent.push(`email="${email}"`);
     }
 
     if (!nome && !setor && !cargo && !email) {
@@ -221,7 +232,10 @@ class User {
 
   async deleteUser(userId) {
     // Pegando a instancia do db
-    const db = await sqlite.open({ filename: './database/database.db', driver: sqlite3.Database });
+    const db = await sqlite.open({
+      filename: "./database/database.db",
+      driver: sqlite3.Database,
+    });
 
     if (!userId) {
       const error = {
@@ -231,7 +245,7 @@ class User {
       return error;
     }
 
-    const rowsId = await db.all(
+    const rowsId = await db.get(
       `SELECT * \ FROM users \ WHERE id = "${userId}"`
     );
 
