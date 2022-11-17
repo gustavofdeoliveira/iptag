@@ -453,6 +453,20 @@ input[type="file"] {
   color: var(--white);
 }
 
+.white-card-img-avatar {
+  width: max-content;
+  max-width: 100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.white-card-name-avatar {
+  font-size: 16px;
+  font-family: "Montserrat-Bold";
+  text-decoration: none;
+  color: var(--black);
+}
+
 /* Final do Visualizar dispositivos */
 .white-card-img-device {
   width: max-content;
@@ -566,4 +580,13 @@ input[type="file"] {
 .close {
   background-color: none;
   border: none;
+}
+
+.trash {
+  color: var(--black);
+  margin-left: 8px;
+}
+
+.trash:hover{
+  color: var(--blue-0);
 }

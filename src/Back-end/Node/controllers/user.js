@@ -3,7 +3,6 @@ require("express-async-errors");
 
 const createUser = (req, res) => {
   const { nome, setor, cargo, email, senha } = req.body;
-
   const user = new service.User(nome, setor, cargo, email, senha);
 
   user.createUser().then((resul) => {
@@ -46,6 +45,23 @@ const getUser = (req, res) => {
   const user = new service.User();
 
   user.getUser(userId).then((resul) => {
+    if (resul.type === "error") {
+      res.status(500).json({
+        error: resul.message,
+      });
+    } else {
+      res.status(200).json({
+        message: resul.message,
+      });
+    }
+  });
+};
+
+const getUsers = (req, res) => {
+
+  const user = new service.User();
+
+  user.getUsers().then((resul) => {
     if (resul.type === "error") {
       res.status(500).json({
         error: resul.message,
