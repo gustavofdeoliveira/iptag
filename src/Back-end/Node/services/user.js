@@ -26,7 +26,9 @@ class User {
       `SELECT * \ FROM users \ WHERE email = "${this.email}"`
     );
 
-    if (rowsEmailUser[0] == this.email) {
+    console.log(rowsEmailUser);
+
+    if (rowsEmailUser[0]) {
       const error = {
         type: "error",
         message: "Usuário já existente com esse email",
@@ -73,16 +75,10 @@ class User {
       driver: sqlite3.Database,
     });
 
-    const password = await db.get(
-      `SELECT * FROM users WHERE email='${emailAuth}'`
-    );
+    const user = await db.get(`SELECT * FROM users WHERE email='${emailAuth}'`);
 
-    const userId = await db.get(
-      `SELECT id FROM users WHERE email='${emailAuth}'`
-    );
-
-    if (password) {
-      passwordMatch = await bcrypt.compare(passwordAuth, password);
+    if (user) {
+      passwordMatch = await bcrypt.compare(passwordAuth, user.senha);
     }
 
     if (!passwordMatch) {
@@ -94,7 +90,7 @@ class User {
 
     token = await jwt.sign(
       {
-        name: userId,
+        name: user.id,
       },
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
@@ -189,7 +185,7 @@ class User {
     }
 
     if (nome) {
-      queryComponent.push(`name="${nome}"`);
+      queryComponent.push(`nome="${nome}"`);
     }
     if (setor) {
       queryComponent.push(`setor="${setor}"`);
@@ -249,7 +245,9 @@ class User {
       `SELECT * \ FROM users \ WHERE id = "${userId}"`
     );
 
-    if (!rowsId[0]) {
+    console.log(rowsId);
+
+    if (!rowsId) {
       const error = {
         type: "error",
         message: "User not found",

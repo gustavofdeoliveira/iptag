@@ -58,7 +58,6 @@ const getUser = (req, res) => {
 };
 
 const getUsers = (req, res) => {
-
   const user = new service.User();
 
   user.getUsers().then((resul) => {
@@ -76,7 +75,8 @@ const getUsers = (req, res) => {
 
 const updateUser = (req, res) => {
   const { nome, setor, cargo, email } = req.body;
-  const { userId } = req;
+    const { userId } = req;
+  console.log(req);
 
   const user = new service.User();
 
@@ -111,4 +111,11 @@ const deleteUser = (req, res) => {
   });
 };
 
-module.exports = { createUser, login, getUser, updateUser, deleteUser };
+module.exports = {
+  createUser,
+  login,
+  getUser,
+  getUsers,
+  updateUser,
+  deleteUser,
+};

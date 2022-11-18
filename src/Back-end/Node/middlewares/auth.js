@@ -8,13 +8,12 @@ const verifyToken = async (req, res, next) => {
     return res.status(403).send("A token is required for authentication");
   }
   try {
-    const { name } = await jwt.verify(token, process.env.JWT_SECRET);
+    const { name } = jwt.verify(token, process.env.JWT_SECRET);
     req.userId = name;
-    next();
+    return next();
   } catch (err) {
     return res.status(401).send("Invalid Token");
   }
-  return next();
 };
 
 module.exports = verifyToken;
