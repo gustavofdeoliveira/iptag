@@ -576,6 +576,11 @@ input[type="file"] {
 .modal {
   background-color: var(--shadow) !important;
 }
+.modal-dialog{
+  align-items: center;
+  display: flex;
+  height: 100%;
+}
 
 .close {
   background-color: none;
