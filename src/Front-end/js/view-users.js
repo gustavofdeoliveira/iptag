@@ -1,13 +1,14 @@
-addEventListener("load", (event) => {
+window.addEventListener("load", (event) => {
+    debugger
     $.ajax({
         url: "http://localhost:3001/user/getUsers",
-        type: "POST",
-       success: async function (resul) {
-            console.log(resul.message)
-            
-        },
-        error: function (err) {
-            console.log(msg);
+        type: "GET",
+        headers: {"Authorization": `Bearer ${msg.token}`},
+        success: function(resul) {
+            console.log(resul);
         }
+    }).fail(function(err) {
+        console.log(err.responseJSON.error)
+        errorMessage(err.responseJSON.error)
     })
 });
