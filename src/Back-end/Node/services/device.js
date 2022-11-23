@@ -29,7 +29,7 @@ class Device {
       driver: sqlite3.Database,
     });
 
-    // Pegando todos os usuários que possuem o email que o usuário informou
+    // Pegando todos os dispositivos que possuem o nome que o usuário informou
     const rowsNamesDevices = await db.all(
       `SELECT * \ FROM device \ WHERE nome = "${this.nome}"`
     );
@@ -193,9 +193,7 @@ class Device {
 
     let queryComponent = [];
 
-    const device = await db.get(
-      `SELECT * \ FROM device \ WHERE nome = "${nome}"`
-    );
+    const device = await db.get(`SELECT * \ FROM device \ WHERE id = "${id}"`);
 
     if (!device) {
       const error = {
@@ -205,6 +203,20 @@ class Device {
       return error;
     }
 
+    if (nome) {
+      const device = await db.all(
+        `SELECT * \ FROM device \ WHERE nome = "${nome}"`
+      );
+      if (device[0]) {
+        const error = {
+          type: "error",
+          message: "This name already exist",
+        };
+        return error;
+      } else {
+        queryComponent.push(`nome="${nome}"`);
+      }
+    }
     if (dtInstalacao) {
       queryComponent.push(`dt_instalacao="${dtInstalacao}"`);
     }
@@ -254,14 +266,14 @@ class Device {
     return sucess;
   }
 
-  async deleteDevice(nome) {
+  async deleteDevice(id) {
     // Pegando a instancia do db
     const db = await sqlite.open({
       filename: "./database/database.db",
       driver: sqlite3.Database,
     });
 
-    if (!nome) {
+    if (!id) {
       const error = {
         type: "error",
         message: "Invalid device",
@@ -269,9 +281,7 @@ class Device {
       return error;
     }
 
-    const rowsId = await db.get(
-      `SELECT * \ FROM device \ WHERE nome = "${nome}"`
-    );
+    const rowsId = await db.get(`SELECT * \ FROM device \ WHERE id = "${id}"`);
 
     if (!rowsId) {
       const error = {
@@ -282,9 +292,7 @@ class Device {
     }
 
     //Efetua a deleção
-    const deletedDevice = await db.run(
-      `DELETE FROM device WHERE nome="${nome}"`
-    );
+    const deletedDevice = await db.run(`DELETE FROM device WHERE id="${id}"`);
     //Verifica se a chamada para o DB ocorreu sem problemas
     if (deletedDevice.changes == 0) {
       const error = {
