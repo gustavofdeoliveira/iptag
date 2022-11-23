@@ -166,8 +166,14 @@ class Device {
     destinoSala,
     destinoPredio
   ) {
+    if (!id) {
+      const error = {
+        type: "error",
+        message: "Id was not passed",
+      };
+      return error;
+    }
     if (
-      !id &&
       !nome &&
       !dtInstalacao &&
       !origemPredio &&
@@ -276,7 +282,7 @@ class Device {
     if (!id) {
       const error = {
         type: "error",
-        message: "Invalid device",
+        message: "Any id provided",
       };
       return error;
     }

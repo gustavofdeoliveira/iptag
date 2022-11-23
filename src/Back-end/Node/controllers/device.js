@@ -115,11 +115,11 @@ const updateDevice = (req, res) => {
 };
 
 const deleteDevice = (req, res) => {
-  const { nome } = req.body;
+  const { id } = req.body;
 
   const device = new service.Device();
 
-  device.deleteDevice(nome).then((resul) => {
+  device.deleteDevice(id).then((resul) => {
     if (resul.type === "error") {
       res.status(500).json({
         error: resul.message,
