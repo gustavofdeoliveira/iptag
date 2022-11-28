@@ -37,7 +37,11 @@ const createDevice = (req, res) => {
 };
 
 const getDevice = (req, res) => {
-  const { nome, apelido, id } = req.body;
+  const { nome, apelido, id } = req.headers;
+
+  console.log(req.headers);
+
+  console.log(nome);
 
   const device = new service.Device();
 

@@ -91,6 +91,13 @@ class Device {
       const deviceInfo = await db.all(
         `SELECT * \ FROM device \ WHERE nome = "${nome}"`
       );
+      if (!deviceInfo[0]) {
+        const error = {
+          type: "error",
+          message: "Nothing found for this device",
+        };
+        return error;
+      }
       const sucess = {
         type: "sucess",
         message: deviceInfo,
@@ -101,6 +108,13 @@ class Device {
       const deviceInfo = await db.all(
         `SELECT * \ FROM device \ WHERE apelido = "${apelido}"`
       );
+      if (!deviceInfo[0]) {
+        const error = {
+          type: "error",
+          message: "Nothing found for this device",
+        };
+        return error;
+      }
       const sucess = {
         type: "sucess",
         message: deviceInfo,
@@ -111,18 +125,19 @@ class Device {
       const deviceInfo = await db.all(
         `SELECT * \ FROM device \ WHERE id = "${id}"`
       );
+      if (!deviceInfo[0]) {
+        const error = {
+          type: "error",
+          message: "Nothing found for this device",
+        };
+        return error;
+      }
       const sucess = {
         type: "sucess",
         message: deviceInfo,
       };
 
       return sucess;
-    } else {
-      const error = {
-        type: "error",
-        message: "Nothing found for this device",
-      };
-      return error;
     }
   }
 
