@@ -153,7 +153,7 @@ p {
 
 .btn-white-blue {
   font-family: "Montserrat-Bold";
-  background-color: var(--white);
+  background-color: var(--white) !important;
   border: 2px solid var(--blue-100) !important;
   border-radius: 32px;
   color: var(--black);
@@ -165,7 +165,7 @@ p {
 
 .btn-white-blue:hover {
   font-family: "Montserrat-Bold";
-  background-color: var(--blue-100);
+  background-color: var(--blue-100) !important;
   border-radius: 2px;
   color: var(--white);
   border-radius: 32px;
@@ -177,7 +177,7 @@ p {
 
 .btn-blue {
   font-family: "Montserrat-Bold";
-  background-color: var(--blue-0);
+  background-color: var(--blue-0) !important;
   border-radius: 32px;
   color: var(--white);
   border: 2px solid var(--blue-0) !important;
@@ -189,7 +189,7 @@ p {
 
 .btn-blue:hover {
   font-family: "Montserrat-Bold";
-  background-color: var(--blue-100);
+  background-color: var(--blue-100) !important;
   border-radius: 2px;
   color: var(--white);
   border-radius: 32px;
@@ -576,7 +576,8 @@ input[type="file"] {
 .modal {
   background-color: var(--shadow) !important;
 }
-.modal-dialog{
+
+.modal-dialog {
   align-items: center;
   display: flex;
   height: 100%;
@@ -592,6 +593,11 @@ input[type="file"] {
   margin-left: 8px;
 }
 
-.trash:hover{
+.trash:hover {
   color: var(--blue-0);
+}
+
+ #btn-editar {
+  color: var(--white);
+  margin-right: 8px !important;
 }

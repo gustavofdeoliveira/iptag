@@ -141,19 +141,18 @@
                 <div class="row">
                   <div class="col-sm-12 col-md-6 col-lg-4">
                     <div class="form-group">
-                      <input type="text" class="white-card-input" id="responsavel" aria-describedby="Responsavel"
-                        placeholder="Responsável*">
+                      <input type="text" class="white-card-input" id="mac" aria-describedby="Endereço MAC"
+                        placeholder="Endereço MAC*">
                     </div>
                   </div>
                   <div class="col-sm-12 col-md-6 col-lg-4">
                     <div class="form-group">
-                      <input type="text" class="white-card-input" id="setor" aria-describedby="setor responsavel"
-                        placeholder="Setor do responsável*">
+                      <input type="text" class="white-card-input" id="setor_responsavel" aria-describedby="setor responsavel" placeholder="Setor do responsável*">
                     </div>
                   </div>
                   <div class="col-sm-12 col-md-6 col-lg-4">
 
-                    <select type="text" class="white-card-input" id="setor">
+                    <select type="text" class="white-card-input" id="tipo">
                       <option selected disabled>Tipo*</option>
                       <option id="option">Acess point</option>
                       <option id="option">Locator</option>
@@ -161,6 +160,7 @@
                     </select>
                   </div>
                 </div>
+                <div class="row mt-4"><div class="col-sm-12" id="erros"></div></div>
                 <div class="row mt-4">
                   <div class="col-sm-12 ">
                     <div class="row justify-content-center">
@@ -169,7 +169,7 @@
                           Voltar</button>
                       </div>
                       <div class="col-sm-12 col-md-6 col-lg-3">
-                        <button class="btn-blue"><i class="fa fa-floppy-o" aria-hidden="true"></i> Salvar</button>
+                        <button class="btn-blue" onclick="saveDispositivo()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Salvar</button>
                       </div>
                     </div>
                   </div>
@@ -198,5 +198,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
 <script type='text/javascript' src='../js/scripts.js'></script>
+<script type='text/javascript' src='../js/register-device.js'></script>
 
 </html>

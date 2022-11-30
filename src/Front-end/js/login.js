@@ -14,10 +14,13 @@ function verifyLogin() {
                 "senha": $("#senha").val()
             }
             , function (msg) {
+                if (msg.token) {
+                    window.localStorage.setItem('auth', msg.token)
+                }
                 console.log(msg);
                 window.location.href = '/view/dashboard.html'
             }).fail(function (err) {
-                debugger
+                window.location.href = '/view/login.html'
                 errorMessage(err.responseJSON.error)
             })
     }

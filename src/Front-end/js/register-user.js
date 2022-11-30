@@ -6,8 +6,10 @@ pressEnter.addEventListener("keydown", function (e) {
 });
 
 function verifyCreate() {
+    document.getElementById("body-pd").style.display = "none";
+    document.getElementById("body-pd").insertAdjacentHTML("beforebegin", '<div class="container-background" id="loader"><div class="loader"><div></div>');
+    startTimer(3);
     if ($("#nome").val() && $("#cargo").val() && $("#setor").val() && $("#email").val() && $("#senha").val()) {
-        debugger
         $.ajax({
             url: "http://localhost:3001/user/create",
             type: "POST",
@@ -19,9 +21,10 @@ function verifyCreate() {
                 senha: $("#senha").val()
             }, success: async function (resul) {
                 console.log(resul.message)
-                window.location.href = '/view/view-users.html'
+                
             },
             error: function (err) {
+                window.location.href = '/view/register-user.html'
                 console.log(msg);
             }
         })

@@ -117,101 +117,28 @@
       </div>
       <div class="row mt-4">
         <div class="col-sm-12 col-md-12 col-lg-12">
-          <div class="row">
-            <div class="col-sm-12 col-md-6 col-lg-3">
+          <div class="row" id="list-users">
+            <div class="col-sm-12 col-md-6 col-lg-3 mt-3">
               <div class="white-card align-items-center">
-
+        
                 <div class="row">
-                  <img class="white-card-img-avatar" src="../images/avatar.png" alt="avatar">
+                  <img class="white-card-img-avatar" src="${users[i].img}" alt="avatar">
                 </div>
                 <div class="row mt-2">
-                  <span class="white-card-name-avatar d-flex justify-content-center">Felipe Silva</span>
+                  <span class="white-card-name-avatar d-flex justify-content-center">${users[i].nome}</span>
                 </div>
-
-
+        
+        
                 <div class="row align-items-center mt-2">
-                  <label class="white-card-label-device">Gestor</label>
-                  <label class="white-card-label-device">Tecnologia</label>
+                  <label class="white-card-label-device">${users[i].cargo}</label>
+                  <label class="white-card-label-device">${users[i].setor}</label>
                 </div>
                 <div class="row justify-content-between align-items-center mt-4">
                   <span class="white-card-time-device">2 min atrás</span>
                   <div class="d-flex align-items-center w-max">
-                    <a href="#" class="white-card-see-device">Ver mais</a>
+                    <a class="white-card-see-device" onclick="viewUser()">Ver mais</a>
                     <img class="white-card-see-arrow-device" src="../images/arrow-right.png" alt="Ver mais">
-                    <a id="delete" class="trash"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-12 col-md-6 col-lg-3">
-              <div class="white-card align-items-center">
-
-                <div class="row">
-                  <img class="white-card-img-avatar" src="../images/avatar.png" alt="avatar">
-                </div>
-                <div class="row mt-2">
-                  <span class="white-card-name-avatar d-flex justify-content-center">Felipe Silva</span>
-                </div>
-                <div class="row align-items-center mt-2">
-                  <label class="white-card-label-device">Gestor</label>
-                  <label class="white-card-label-device">Tecnologia</label>
-                </div>
-                <div class="row justify-content-between align-items-center mt-4">
-                  <span class="white-card-time-device">2 min atrás</span>
-                  <div class="d-flex align-items-center w-max">
-                    <a href="#" class="white-card-see-device">Ver mais</a>
-                    <img class="white-card-see-arrow-device" src="../images/arrow-right.png" alt="Ver mais">
-                    <a id="delete" class="trash"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-12 col-md-6 col-lg-3">
-              <div class="white-card align-items-center">
-
-                <div class="row">
-                  <img class="white-card-img-avatar" src="../images/avatar.png" alt="avatar">
-                </div>
-                <div class="row mt-2">
-                  <span class="white-card-name-avatar d-flex justify-content-center">Felipe Silva</span>
-                </div>
-
-
-                <div class="row align-items-center mt-2">
-                  <label class="white-card-label-device">Gestor</label>
-                  <label class="white-card-label-device">Tecnologia</label>
-                </div>
-                <div class="row justify-content-between align-items-center mt-4">
-                  <span class="white-card-time-device">2 min atrás</span>
-                  <div class="d-flex align-items-center w-max">
-                    <a href="#" class="white-card-see-device">Ver mais</a>
-                    <img class="white-card-see-arrow-device" src="../images/arrow-right.png" alt="Ver mais">
-                    <a id="delete" class="trash"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-12 col-md-6 col-lg-3">
-              <div class="white-card align-items-center">
-
-                <div class="row">
-                  <img class="white-card-img-avatar" src="../images/avatar.png" alt="avatar">
-                </div>
-                <div class="row mt-2">
-                  <span class="white-card-name-avatar d-flex justify-content-center">Felipe Silva</span>
-                </div>
-
-
-                <div class="row align-items-center mt-2">
-                  <label class="white-card-label-device">Gestor</label>
-                  <label class="white-card-label-device">Tecnologia</label>
-                </div>
-                <div class="row justify-content-between align-items-center mt-4">
-                  <span class="white-card-time-device">2 min atrás</span>
-                  <div class="d-flex align-items-center w-max">
-                    <a href="#" class="white-card-see-device">Ver mais</a>
-                    <img class="white-card-see-arrow-device" src="../images/arrow-right.png" alt="Ver mais">
-                    <a id="delete" class="trash"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                    <a id="delete" class="trash" value="${users[i].id}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                   </div>
                 </div>
               </div>

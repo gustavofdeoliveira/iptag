@@ -105,6 +105,7 @@ a {
 
 .dropdown-navbar{
     color: var(--black);
+    font-family: "Montserrat-Bold";
 }
 .dropdown-navbar:hover{
     color: var(--blue-0);
