@@ -6,20 +6,24 @@ const { open } = require("sqlite");
 class Device {
   constructor(
     nome,
-    origemPredio,
-    origemSala,
-    setor,
-    responsavel,
     apelido,
-    status
+    mac_address,
+    dt_instalacao,
+    origem_predio,
+    origem_sala,
+    setor_origem,
+    responsavel,
+    tipo
   ) {
-    this.nome = nome;
-    this.origemPredio = origemPredio;
-    this.origemSala = origemSala;
-    this.setor = setor;
-    this.responsavel = responsavel;
-    this.apelido = apelido;
-    this.status = status;
+    (this.nome = nome),
+      (this.apelido = apelido),
+      (this.macAddress = mac_address),
+      (this.dtInstalacao = dt_instalacao),
+      (this.origemPredio = origem_predio),
+      (this.origemSala = origem_sala),
+      (this.setorOrigem = setor_origem),
+      (this.responsavel = responsavel),
+      (this.tipo = tipo);
   }
 
   async createDevice() {
@@ -44,15 +48,17 @@ class Device {
 
     // Inserindo as informações no db
     const inserction = await db.run(
-      "INSERT INTO device (nome, origem_predio, origem_sala, setor, responsavel, apelido, status, dt_instalacao) VALUES (?,?,?,?,?,?,?, DateTime('now','localtime'))",
+      "INSERT INTO device (nome, apelido, mac_address, dt_instalacao, origem_predio, origem_sala, setor_origem, responsavel, tipo) VALUES (?,?,?,?,?,?,?,?,?)",
       [
         this.nome,
+        this.apelido,
+        this.macAddress,
+        this.dtInstalacao,
         this.origemPredio,
         this.origemSala,
-        this.setor,
+        this.setorOrigem,
         this.responsavel,
-        this.apelido,
-        this.status,
+        this.tipo,
       ]
     );
 
@@ -171,34 +177,37 @@ class Device {
   async editDevice(
     id,
     nome,
-    dtInstalacao,
-    origemPredio,
-    origemSala,
-    setor,
-    responsavel,
     apelido,
+    mac_address,
+    dt_instalacao,
+    origem_predio,
+    origem_sala,
+    setor_origem,
+    responsavel,
+    tipo,
     status,
-    destinoSala,
-    destinoPredio
+    atual_predio,
+    atual_sala,
+    dt_rastreio,
+    hr_rastreio,
+    dt_atualizacao
   ) {
-    if (!id) {
-      const error = {
-        type: "error",
-        message: "Id was not passed",
-      };
-      return error;
-    }
     if (
       !nome &&
-      !dtInstalacao &&
-      !origemPredio &&
-      !origemSala &&
-      !setor &&
-      !responsavel &&
       !apelido &&
+      !mac_address &&
+      !dt_instalacao &&
+      !origem_predio &&
+      !origem_sala &&
+      !setor_origem &&
+      !responsavel &&
+      !tipo &&
       !status &&
-      !destinoSala &&
-      !destinoPredio
+      !atual_predio &&
+      !atual_sala &&
+      !dt_rastreio &&
+      !hr_rastreio &&
+      !dt_atualizacao
     ) {
       const error = {
         type: "error",
@@ -238,38 +247,53 @@ class Device {
         queryComponent.push(`nome="${nome}"`);
       }
     }
-    if (dtInstalacao) {
-      queryComponent.push(`dt_instalacao="${dtInstalacao}"`);
+    if (apelido) {
+      queryComponent.push(`apelido="${apelido}"`);
     }
-    if (origemPredio) {
-      queryComponent.push(`origem_predio="${origemPredio}"`);
+    if (mac_address) {
+      queryComponent.push(`mac_address="${mac_address}"`);
     }
-    if (origemSala) {
-      queryComponent.push(`origem_sala="${origemSala}"`);
+    if (dt_instalacao) {
+      queryComponent.push(`dt_instalacao="${dt_instalacao}"`);
     }
-    if (setor) {
-      queryComponent.push(`setor="${setor}"`);
+    if (origem_predio) {
+      queryComponent.push(`origem_predio="${origem_predio}"`);
+    }
+    if (origem_sala) {
+      queryComponent.push(`origem_sala"${origem_sala}"`);
+    }
+    if (setor_origem) {
+      queryComponent.push(`setor_origem="${setor_origem}"`);
     }
     if (responsavel) {
       queryComponent.push(`responsavel="${responsavel}"`);
     }
-    if (apelido) {
-      queryComponent.push(`apelido="${apelido}"`);
+    if (tipo) {
+      queryComponent.push(`tipo="${tipo}"`);
     }
     if (status) {
       queryComponent.push(`status="${status}"`);
     }
-    if (destinoSala) {
-      queryComponent.push(`destino_sala="${destinoSala}"`);
+    if (atual_predio) {
+      queryComponent.push(`atual_predio="${atual_predio}"`);
     }
-    if (destinoPredio) {
-      queryComponent.push(`destino_predio="${destinoPredio}"`);
+    if (atual_sala) {
+      queryComponent.push(`atual_sala="${atual_sala}"`);
+    }
+    if (dt_rastreio) {
+      queryComponent.push(`dt_rastreio="${dt_rastreio}"`);
+    }
+    if (hr_rastreio) {
+      queryComponent.push(`hr_rastreio="${hr_rastreio}"`);
+    }
+    if (dt_atualizacao) {
+      queryComponent.push(`dt_atualizacao="${dt_atualizacao}"`);
     }
 
     const queryJoined = queryComponent.join(",");
 
     const update = await db.run(
-      `UPDATE device SET ${queryJoined}, dt_atualizacao=DateTime('now','localtime') WHERE nome="${nome}"`
+      `UPDATE device SET ${queryJoined} WHERE id="${id}"`
     );
     if (update.changes === 0) {
       const error = {

@@ -1,9 +1,18 @@
 const service = require("../services/user");
+const { body, validationResult } = require("express-validator");
 require("express-async-errors");
 
 const createUser = (req, res) => {
   const { nome, setor, cargo, email, senha } = req.body;
   const user = new service.User(nome, setor, cargo, email, senha);
+
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({
+      error: errors.errors[0].msg,
+    });
+  }
 
   user.createUser().then((resul) => {
     if (resul.type === "error") {
@@ -22,6 +31,14 @@ const createUser = (req, res) => {
 
 const login = (req, res) => {
   const { email, senha } = req.body;
+
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({
+      error: errors.errors[0].msg,
+    });
+  }
 
   const user = new service.User();
 
@@ -75,7 +92,7 @@ const getUsers = (req, res) => {
 
 const updateUser = (req, res) => {
   const { nome, setor, cargo, email } = req.body;
-    const { userId } = req;
+  const { userId } = req;
   console.log(req);
 
   const user = new service.User();

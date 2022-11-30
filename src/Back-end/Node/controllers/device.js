@@ -1,25 +1,39 @@
 const service = require("../services/device");
+const { body, validationResult } = require("express-validator");
+
 require("express-async-errors");
 
 const createDevice = (req, res) => {
   const {
     nome,
-    origemPredio,
-    origemSala,
-    setor,
-    responsavel,
     apelido,
-    status,
+    mac_address,
+    dt_instalacao,
+    origem_predio,
+    origem_sala,
+    setor_origem,
+    responsavel,
+    tipo,
   } = req.body;
   const device = new service.Device(
     nome,
-    origemPredio,
-    origemSala,
-    setor,
-    responsavel,
     apelido,
-    status
+    mac_address,
+    dt_instalacao,
+    origem_predio,
+    origem_sala,
+    setor_origem,
+    responsavel,
+    tipo
   );
+
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({
+      error: errors.errors[0].msg,
+    });
+  }
 
   device.createDevice().then((resul) => {
     if (resul.type === "error") {
@@ -75,18 +89,32 @@ const getDevices = (req, res) => {
 };
 
 const updateDevice = (req, res) => {
+
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({
+      error: errors.errors[0].msg,
+    });
+  }
+
   const {
     id,
     nome,
-    dtInstalacao,
-    origemPredio,
-    origemSala,
-    setor,
-    responsavel,
     apelido,
+    mac_address,
+    dt_instalacao,
+    origem_predio,
+    origem_sala,
+    setor_origem,
+    responsavel,
+    tipo,
     status,
-    destinoSala,
-    destinoPredio,
+    atual_predio,
+    atual_sala,
+    dt_rastreio,
+    hr_rastreio,
+    dt_atualizacao,
   } = req.body;
 
   const device = new service.Device();
@@ -95,15 +123,20 @@ const updateDevice = (req, res) => {
     .editDevice(
       id,
       nome,
-      dtInstalacao,
-      origemPredio,
-      origemSala,
-      setor,
-      responsavel,
       apelido,
+      mac_address,
+      dt_instalacao,
+      origem_predio,
+      origem_sala,
+      setor_origem,
+      responsavel,
+      tipo,
       status,
-      destinoSala,
-      destinoPredio
+      atual_predio,
+      atual_sala,
+      dt_rastreio,
+      hr_rastreio,
+      dt_atualizacao
     )
     .then((resul) => {
       if (resul.type === "error") {
