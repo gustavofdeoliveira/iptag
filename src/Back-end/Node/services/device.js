@@ -338,8 +338,12 @@ class Device {
     let querryComponents = [];
 
     querryComponents.push(
-      `origem_predio="${movedDevice.atual_predio || movedDevice.origem_sala}"`
+      `origem_predio="${movedDevice.atual_predio || movedDevice.origem_predio}"`
     );
+    if (movedDevice.atual_sala === routerDevice.origem_sala) {
+      movedDevice.atual_sala = null;
+      movedDevice.atual_predio = null;
+    }
     querryComponents.push(
       `origem_sala="${movedDevice.atual_sala || movedDevice.origem_sala}"`
     );
