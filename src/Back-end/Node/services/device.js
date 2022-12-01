@@ -340,7 +340,10 @@ class Device {
     querryComponents.push(
       `origem_predio="${movedDevice.atual_predio || movedDevice.origem_predio}"`
     );
-    if (movedDevice.atual_sala === routerDevice.origem_sala) {
+    if (
+      movedDevice.atual_sala === routerDevice.origem_sala &&
+      movedDevice.atual_predio === routerDevice.origem_predio
+    ) {
       movedDevice.atual_sala = null;
       movedDevice.atual_predio = null;
     }

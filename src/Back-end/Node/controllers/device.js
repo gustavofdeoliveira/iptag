@@ -153,6 +153,8 @@ const updateDevice = (req, res) => {
 const moveDevice = (req, res) => {
   const { mac_address_router, mac_address_moved } = req.body;
 
+  console.log(req.body);
+
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
