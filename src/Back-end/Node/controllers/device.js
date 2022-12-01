@@ -89,7 +89,6 @@ const getDevices = (req, res) => {
 };
 
 const updateDevice = (req, res) => {
-
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
@@ -151,6 +150,32 @@ const updateDevice = (req, res) => {
     });
 };
 
+const moveDevice = (req, res) => {
+  const { mac_address_router, mac_address_moved } = req.body;
+
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({
+      error: errors.errors[0].msg,
+    });
+  }
+
+  const device = new service.Device();
+
+  device.moveDevice(mac_address_router, mac_address_moved).then((resul) => {
+    if (resul.type === "error") {
+      res.status(500).json({
+        error: resul.message,
+      });
+    } else {
+      res.status(200).json({
+        message: resul.message,
+      });
+    }
+  });
+};
+
 const deleteDevice = (req, res) => {
   const { id } = req.body;
 
@@ -175,4 +200,5 @@ module.exports = {
   getDevices,
   updateDevice,
   deleteDevice,
+  moveDevice,
 };

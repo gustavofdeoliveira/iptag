@@ -3,6 +3,7 @@ require("dotenv").config();
 const sqlite3 = require("sqlite3").verbose();
 const sqlite = require("sqlite");
 const { open } = require("sqlite");
+const { body } = require("express-validator");
 class Device {
   constructor(
     nome,
@@ -260,7 +261,7 @@ class Device {
       queryComponent.push(`origem_predio="${origem_predio}"`);
     }
     if (origem_sala) {
-      queryComponent.push(`origem_sala"${origem_sala}"`);
+      queryComponent.push(`origem_sala="${origem_sala}"`);
     }
     if (setor_origem) {
       queryComponent.push(`setor_origem="${setor_origem}"`);
@@ -293,7 +294,7 @@ class Device {
     const queryJoined = queryComponent.join(",");
 
     const update = await db.run(
-      `UPDATE device SET ${queryJoined} WHERE id="${id}"`
+      `UPDATE device \ SET ${queryJoined}, dt_atualizacao = Date('now', 'localtime') \ WHERE id="${id}"`
     );
     if (update.changes === 0) {
       const error = {
@@ -306,6 +307,62 @@ class Device {
     const sucess = {
       type: "sucess",
       message: "Informations Updated",
+    };
+
+    return sucess;
+  }
+
+  async moveDevice(mac_address_router, mac_address_moved) {
+    // Pegando a instancia do db
+    const db = await sqlite.open({
+      filename: "./database/database.db",
+      driver: sqlite3.Database,
+    });
+
+    const routerDevice = await db.get(
+      `SELECT * \ FROM device \ WHERE mac_address = "${mac_address_router}"`
+    );
+
+    const movedDevice = await db.get(
+      `SELECT * \ FROM device \ WHERE mac_address="${mac_address_moved}"`
+    );
+
+    if (!routerDevice || !movedDevice) {
+      const error = {
+        type: "error",
+        message: "Incorrect mac address",
+      };
+      return error;
+    }
+
+    let querryComponents = [];
+
+    querryComponents.push(
+      `origem_predio="${movedDevice.atual_predio || movedDevice.origem_sala}"`
+    );
+    querryComponents.push(
+      `origem_sala="${movedDevice.atual_sala || movedDevice.origem_sala}"`
+    );
+    querryComponents.push(`atual_predio="${routerDevice.origem_predio}"`);
+    querryComponents.push(`atual_sala="${routerDevice.origem_sala}"`);
+
+    const queryJoined = querryComponents.join(",");
+
+    const insertions = await db.run(
+      `UPDATE device \ SET ${queryJoined}, dt_rastreio = Date('now', 'localtime') , hr_rastreio = Time('now','localtime') \ WHERE mac_address = "${mac_address_moved}"`
+    );
+
+    if (insertions.changes === 0) {
+      const error = {
+        type: "error",
+        message: "Database error, try later",
+      };
+      return error;
+    }
+
+    const sucess = {
+      type: "sucess",
+      message: "Device moved with sucess",
     };
 
     return sucess;

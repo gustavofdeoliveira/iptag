@@ -54,6 +54,23 @@ router.post(
   deviceController.createDevice
 );
 
+router.post(
+  "/move",
+  [
+    body(
+      "mac_address_moved",
+      "mac address do dispositivo que se moveu é necessário"
+    ).exists({ checkFalsy: true }),
+  ],
+  [
+    body(
+      "mac_address_router",
+      "mac address do dispositivo que se moveu é necessário"
+    ).exists({ checkFalsy: true }),
+  ],
+  deviceController.moveDevice
+);
+
 router.get("/get", userAuth, deviceController.getDevice);
 
 router.get("/getDevices", userAuth, deviceController.getDevices);
