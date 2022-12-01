@@ -32,56 +32,6 @@
 
 <body style="display: flex;" id="body-pd">
 
-  <header class="header" id="header">
-    <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
-    <div class="d-flex align-items-center"> <img class="img-navbar" src="../images/avatar.png">
-      <div class="dropdown">
-        <a class="dropdown-navbar dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-          Usuário
-        </a>
-        <div class="dropdown-menu dropdown-right" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#"> Meu perfil</a>
-          <a class="dropdown-item" href="#">Sair <i class="fa fa-sign-out" aria-hidden="true"></i></a>
-        </div>
-      </div>
-    </div>
-  </header>
-  <div class="l-navbar" id="nav-bar">
-    <nav class="nav">
-      <div>
-        <a href="#" class="nav_logo">
-          <img class="logo-white" src="../images/logo-ipt-white.png">
-          <span class="nav-logo-name">IPTag</span>
-        </a>
-        <div class="nav_list">
-          <a href="#" class="nav_link">
-            <i class='bx bx-grid-alt nav_icon'></i>
-            <span class="nav_name">Dashboard</span>
-          </a>
-
-          <a href="#" class="nav_link">
-            <i class='bx bx-bell nav_icon'></i>
-            <span class="nav_name">Notificações</span>
-          </a>
-          <a href="#" class="nav_link">
-            <i class='bx bx-search nav_icon'></i>
-            <span class="nav_name">Buscar</span>
-          </a>
-          <a href="#" class="nav_link active">
-            <i class='bx bx-mobile nav_icon'></i>
-            <span class="nav_name">Dispositivos</span>
-          </a>
-          <a href="#" class="nav_link">
-            <i class='bx bxs-user nav_icon'></i>
-            <span class="nav_name">Usuários</span>
-          </a>
-
-        </div>
-      </div>
-    </nav>
-  </div>
-
   <!--Container Main start-->
   <main class="contaner d-flex align-items-center">
     <div class="col-sm-12">
@@ -114,29 +64,15 @@
           <div class="row">
             <div class="col-sm-12 col-md-6 col-lg-6">
               <div class="white-card">
-                <div class="row">
-                  <p class="no-margin device-infos-subtiles">Dados:</p>
-                  <p class="no-margin" id="device-id"><b>ID:</b> #01232</p>
-                  <p class="no-margin" id="device-name"><b>Nome:</b> ESP-32AB (ESP externo)</p>
-                  <p class="no-margin" id="device-last-collection"><b>Última coleta:</b> 04/10/2022</p>
-                  <p class="no-margin device-infos-subtiles">Bateria:</p>
-                  <p class="no-margin" id="batery-level"><b>Nível de bateria: </b> 70%</p>
-                  <p class="no-margin" id="batery-last-switch"><b>Última troca: </b> 10/10/2022</p>
+                <div class="row" id="dados_card">
+                  
                 </div>
               </div>
             </div>
             <div class="col-sm-12 col-md-6 col-lg-6">
               <div class="white-card">
-                <div class="row">
-                  <p class="no-margin device-infos-subtiles">Origem:</p>
-                  <div class="infos-aside-bx">
-                    <p class="no-margin" id="device-building"><b>Prédio:</b> 68</p>
-                    <p class="no-margin" id="device-room"><b>Sala:</b> 18</p>
-                  </div>
-                  <p class="no-margin" id="device-section"><b>Setor:</b> Tecnologia</p>
-                  <p class="no-margin device-infos-subtiles">Responsável:</p>
-                  <p class="no-margin" id="responsible-name"><b>Nome: </b> Arthur Santos</p>
-                  <p class="no-margin" id="responsible-section"><b>Setor:</b> Tecnologia</p>
+                <div class="row" id="origem-card">
+                  
                 </div>
               </div>
             </div>
@@ -157,18 +93,8 @@
           <div class="row">
 
             <div class="white-card" style="height: unset;">
-              <div class="row">
-                <p class="no-margin device-infos-subtiles">Atualmente:</p>
-
-                <p class="no-margin d-flex" id="device-status"><b>Status: </b> ativo</p>
-                <div class="infos-aside-bx">
-                  <p class="no-margin"><b>Prédio:</b> 68</p>
-                  <p class="no-margin"><b>Sala:</b> 18</p>
-                </div>
-                <div class="infos-aside-bx">
-                  <p class="no-margin"><b>Data:</b> 04/10/2022</p>
-                  <p class="no-margin"><b>Hora:</b> 09:22</p>
-                </div>
+              <div class="row" id="location-card">
+                
               </div>
             </div>
             <div class="row mt-2">

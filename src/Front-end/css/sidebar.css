@@ -90,6 +90,7 @@ a {
 }
 
 .nav_logo, .nav_link {
+    font-family: "Montserrat-Bold";
     display: grid;
     grid-template-columns: max-content max-content;
     align-items: center;
@@ -130,12 +131,14 @@ a {
     position: relative;
     color: var(--white);
     margin-bottom: 16px;
-    transition: .3s
+    transition: .3s;
+    text-decoration: none;
 }
 
 .nav_link:hover {
     background-color: var(--white);
     color: var(--blue-0);
+    text-decoration: none;
 }
 
 .nav_icon {

@@ -1,5 +1,4 @@
 
-let auth = window.localStorage.getItem('auth');
 loadDevices();
 
 async function loadDevices() {
@@ -40,7 +39,7 @@ async function listDevices(devices) {
                   <label class="white-card-label-device">${devices[i].origem_sala}</label>
                 </div>
                 <div class="row justify-content-between mt-4">
-                  <span class="white-card-time-device">2 min atrás</span>
+                  <span class="white-card-time-device">${devices[i].hr_rastreio}</span>
                   <div class="d-flex align-items-center w-max">
                     <a href="#" class="white-card-see-device" onclick="viewDevice(${devices[i].id})">Ver mais</a>
                     <img class="white-card-see-arrow-device" src="../images/arrow-right.png" alt="Ver mais">
@@ -52,4 +51,9 @@ async function listDevices(devices) {
 `
   }
 
+}
+
+function viewDevice(deviceId){
+  window.location.href = `/view/view-device-adm.html?id=${deviceId}`;
+  
 }

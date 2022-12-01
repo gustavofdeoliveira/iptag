@@ -5,8 +5,7 @@ pressEnter.addEventListener("keydown", function (e) {
     }
 });
 
-function verifyLogin() {
-    debugger
+function verifyLogin() {    
     if ($("#email").val() && $("#senha").val()) {
         $.post("http://localhost:3001/user/login",
             {
