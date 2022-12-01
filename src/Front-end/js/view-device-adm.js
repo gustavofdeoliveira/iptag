@@ -10,11 +10,6 @@ function close_modal() {
   document.getElementById("modal").style.display = "none";
 };
 
-function save() {
-  document.getElementById("modal").style.display = "none";
-};
-
-
 const params = new URLSearchParams(window.location.search)
 deviceId = params.get('id');
 loadDevice(deviceId);
@@ -75,9 +70,9 @@ async function listDevice(device) {
 }
 
 
-function editDevice() {
+$("#edit").click(function () {
   window.location.href = `/view/update-device.html?id=${deviceId}`;
-}
+});
 
 $("#find").click(function () {
   document.getElementById("body-pd").style.display = "none";
@@ -85,3 +80,21 @@ $("#find").click(function () {
   startTimer(3);
   loadDevice(deviceId);
 });
+
+function save() {
+  document.getElementById("modal").style.display = "none";
+  deleteDevice(deviceId);
+};
+async function deleteDevice(deviceId) {
+  await $.ajax({
+    url: "http://localhost:3001/device/delete",
+    type: "DELETE",
+    headers: { "Authorization": `${auth}` },
+    data: { id: deviceId },
+    success: async function (resul) {
+      window.location.href = '/view/view-devices-adm.html'
+    }
+  }).fail(function (err) {
+    console.log(err.responseJSON.message)
+  })
+}
