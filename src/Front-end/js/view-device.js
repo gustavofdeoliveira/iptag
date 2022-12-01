@@ -1,5 +1,4 @@
-document.onreadystatechange = async function () {
-  if (document.readyState == "complete") {
+
     const params = new URLSearchParams(window.location.search)
     deviceId = params.get('id');
     loadDevice(deviceId);
@@ -22,7 +21,7 @@ document.onreadystatechange = async function () {
       } else {
         device.status = "off";
       }
-      document.getElementById('dados_card').innerHTML += `
+      document.getElementById('dados_card').innerHTML = `
       <p class="no-margin device-infos-subtiles">Dados:</p>
                   <p class="no-margin" id="device-id"><b>ID:</b> #${device.id}</p>
                   <p class="no-margin" id="device-name"><b>Nome:</b> ${device.nome} (${device.apelido})</p>
@@ -31,7 +30,7 @@ document.onreadystatechange = async function () {
                   <p class="no-margin" id="batery-level"><b>Nível de bateria: </b> 70%</p>
                   <p class="no-margin" id="batery-last-switch"><b>Última troca: </b> ${device.dt_atualizacao}</p>
       `;
-      document.getElementById('origem-card').innerHTML += `
+      document.getElementById('origem-card').innerHTML = `
       <p class="no-margin device-infos-subtiles">Origem:</p>
                   <div class="infos-aside-bx">
                     <p class="no-margin" id="device-building"><b>Prédio:</b> ${device.origem_predio}</p>
@@ -42,7 +41,7 @@ document.onreadystatechange = async function () {
                   <p class="no-margin" id="responsible-name"><b>Nome: </b> ${device.responsavel}</p>
                   <p class="no-margin" id="responsible-section"><b>Setor:</b> ${device.setor_origem}</p>
       `;
-      document.getElementById('location-card').innerHTML += `
+      document.getElementById('location-card').innerHTML = `
       <p class="no-margin device-infos-subtiles">Atualmente:</p>
 
       <p class="no-margin d-flex" id="device-status"><b>Status: </b> ${device.status}</p>
@@ -58,9 +57,16 @@ document.onreadystatechange = async function () {
 
       `
     }
-  }
-}
 
 function editDevice() {
   window.location.href = `/view/update-device.html?id=${deviceId}`;
 }
+
+
+$("#find").click(function () {
+  debugger
+  document.getElementById("body-pd").style.display = "none";
+    document.getElementById("body-pd").insertAdjacentHTML("beforebegin", '<div class="container-background" id="loader"><div class="loader"><div></div>');
+    startTimer(3);
+    loadDevice(deviceId);
+});
