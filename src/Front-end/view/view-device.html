@@ -49,29 +49,15 @@
           <div class="row">
             <div class="col-sm-12 col-md-6 col-lg-6">
               <div class="white-card">
-                <div class="row">
-                  <p class="no-margin device-infos-subtiles">Dados:</p>
-                  <p class="no-margin" id="device-id"><b>ID:</b> #01232</p>
-                  <p class="no-margin" id="device-name"><b>Nome:</b> ESP-32AB (ESP externo)</p>
-                  <p class="no-margin" id="device-last-collection"><b>Última coleta:</b> 04/10/2022</p>
-                  <p class="no-margin device-infos-subtiles">Bateria:</p>
-                  <p class="no-margin" id="batery-level"><b>Nível de bateria: </b> 70%</p>
-                  <p class="no-margin" id="batery-last-switch"><b>Última troca: </b> 10/10/2022</p>
+                <div class="row" id="dados_card">
+                 
                 </div>
               </div>
             </div>
             <div class="col-sm-12 col-md-6 col-lg-6">
               <div class="white-card">
-                <div class="row">
-                  <p class="no-margin device-infos-subtiles">Origem:</p>
-                  <div class="infos-aside-bx">
-                    <p class="no-margin" id="device-building"><b>Prédio:</b> 68</p>
-                    <p class="no-margin" id="device-room"><b>Sala:</b> 18</p>
-                  </div>
-                  <p class="no-margin" id="device-section"><b>Setor:</b> Tecnologia</p>
-                  <p class="no-margin device-infos-subtiles">Responsável:</p>
-                  <p class="no-margin" id="responsible-name"><b>Nome: </b> Arthur Santos</p>
-                  <p class="no-margin" id="responsible-section"><b>Setor:</b> Tecnologia</p>
+                <div class="row" id="origem-card">
+                
                 </div>
               </div>
             </div>
@@ -92,18 +78,8 @@
           <div class="row">
 
             <div class="white-card" style="height: unset;">
-              <div class="row">
-                <p class="no-margin device-infos-subtiles">Origem:</p>
-                <p class="no-margin" id="device-status"><b>Status:</b> ativo</p>
-                <div class="infos-aside-bx">
-                  <p class="no-margin"><b>Prédio:</b> 68</p>
-                  <p class="no-margin"><b>Sala:</b> 18</p>
-                </div>
-                <div class="infos-aside-bx">
-                  <p class="no-margin"><b>Data:</b> 04/10/2022</p>
-                  <p class="no-margin"><b>Hora:</b> 09:22</p>
-                </div>
-              </div>
+              <div class="row" id="location-card">
+              
             </div>
             <div class="row mt-2">
               <div class="btns-container">
@@ -128,24 +104,11 @@
   integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 <script type='text/javascript'
   src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js'></script>
+  <script
+  src="https://code.jquery.com/jquery-3.6.1.js"
+  integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+  crossorigin="anonymous"></script>
 <script type='text/javascript' src='../js/scripts.js'></script>
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript">
-  google.charts.load('current');   // Don't need to specify chart libraries!
-  google.charts.setOnLoadCallback(drawVisualization);
-
-  function drawVisualization() {
-    var wrapper = new google.visualization.ChartWrapper({
-      chartType: 'LineChart',
-      dataSourceUrl: 'http://spreadsheets.google.com/tq?key=pCQbetd-CptGXxxQIG7VFIQ&pub=1',
-      query: 'SELECT A,D WHERE D > 100 ORDER BY D',
-      options: { 'title': 'Countries' },
-      containerId: 'graphic-white-card'
-    });
-    var graphic = wrapper.draw();
-    console.log(graphic)
-
-  }
-</script>
+<script src="../js/view-device.js"></script>
 
 </html>
