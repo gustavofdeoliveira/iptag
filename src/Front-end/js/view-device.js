@@ -64,7 +64,6 @@ function editDevice() {
 
 
 $("#find").click(function () {
-  debugger
   document.getElementById("body-pd").style.display = "none";
     document.getElementById("body-pd").insertAdjacentHTML("beforebegin", '<div class="container-background" id="loader"><div class="loader"><div></div>');
     startTimer(3);
