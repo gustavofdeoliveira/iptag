@@ -1,5 +1,3 @@
-let auth = window.localStorage.getItem('auth');
-
 getUser();
 
 async function getUser() {

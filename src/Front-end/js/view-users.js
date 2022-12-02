@@ -1,5 +1,4 @@
 
-  let auth = window.localStorage.getItem('auth');
   loadUsers();
 
   async function loadUsers() {
@@ -16,7 +15,7 @@
   }
 
   async function listUsers(users) {
-    for (i = 0; i != users.lenght; i++) {
+    for (i = 0; i <= users.length; i++) {
       if (!users[i].img) {
         users[i].img = "../images/avatar.png"
       }
