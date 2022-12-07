@@ -597,10 +597,20 @@ input[type="file"] {
   color: var(--blue-0);
 }
 
- #btn-editar {
+#btn-editar {
   color: var(--white);
   margin-right: 8px !important;
 }
-a{
+
+a {
   text-decoration: none !important;
+}
+
+.fa-eye, .fa-eye-slash {
+  position: absolute;
+  margin-top: 15px;
+  display: block;
+  margin-left: -25px;
+  font-size: 22px;
+  margin-top: 12px;
 }

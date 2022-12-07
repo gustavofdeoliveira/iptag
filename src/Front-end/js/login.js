@@ -24,3 +24,14 @@ function verifyLogin() {
             })
     }
 }
+activateSenha = false;
+$( "#see" ).click(function() {
+    activateSenha = !activateSenha;
+    if(activateSenha == true){
+        $("#senha").attr("type", "text");
+        $( "#see" ).removeClass( "fa fa-eye" ).addClass( "fa fa-eye-slash" );
+    }else{
+        $("#senha").attr("type", "password");
+        $( "#see" ).removeClass( "fa fa-eye-slash" ).addClass( "fa fa-eye" );
+    }
+  });
