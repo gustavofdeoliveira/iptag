@@ -48,5 +48,5 @@ function saveDelete() {
  }
 
 $("#update").click(function () {
-    window.location.href = '/view/update-user.html'
+    window.location.href = '/view/update-profile.html'
 });

@@ -28,8 +28,8 @@ google.charts.load('current', {'packages':['line']});
 
       var options = {
 
-        width: 900,
-        height: 300
+        width: 800,
+        height: 200
       };
 
       var chart = new google.charts.Line(document.getElementById('graphic-white-card'));
