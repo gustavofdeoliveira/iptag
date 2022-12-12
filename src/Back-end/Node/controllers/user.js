@@ -93,11 +93,28 @@ const getUsers = (req, res) => {
 const updateUser = (req, res) => {
   const { nome, setor, cargo, email } = req.body;
   const { userId } = req;
-  console.log(req);
 
   const user = new service.User();
 
   user.editUser(userId, nome, setor, cargo, email).then((resul) => {
+    if (resul.type === "error") {
+      res.status(500).json({
+        error: resul.message,
+      });
+    } else {
+      res.status(200).json({
+        message: resul.message,
+      });
+    }
+  });
+};
+
+const updateUserAdmin = (req, res) => {
+  const { is_admin, waiting, userId } = req.body;
+
+  const user = new service.User();
+
+  user.editUserAdmin(is_admin, waiting, userId).then((resul) => {
     if (resul.type === "error") {
       res.status(500).json({
         error: resul.message,
@@ -128,11 +145,39 @@ const deleteUser = (req, res) => {
   });
 };
 
+const deleteUserAdmin = (req, res) => {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({
+      error: errors.errors[0].msg,
+    });
+  }
+
+  const { id } = req.body;
+
+  const user = new service.User();
+
+  user.deleteUserAdmin(id).then((resul) => {
+    if (resul.type === "error") {
+      res.status(500).json({
+        error: resul.message,
+      });
+    } else {
+      res.status(200).json({
+        message: resul.message,
+      });
+    }
+  });
+};
+
 module.exports = {
   createUser,
   login,
   getUser,
   getUsers,
   updateUser,
+  updateUserAdmin,
   deleteUser,
+  deleteUserAdmin,
 };

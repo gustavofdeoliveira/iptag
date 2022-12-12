@@ -3,11 +3,29 @@ const { body, validationResult } = require("express-validator");
 
 require("express-async-errors");
 
+const cadastroDevice = (req, res) => {
+  const { nome, mac_address } = req.body;
+
+  const device = new service.Device();
+
+  device.cadastroDevice(nome, mac_address).then((resul) => {
+    if (resul.type === "error") {
+      res.status(500).json({
+        error: resul.message,
+      });
+    } else {
+      res.status(200).json({
+        message: resul.message,
+      });
+    }
+  });
+};
+
 const createDevice = (req, res) => {
   const {
+    id_cadastro,
     nome,
     apelido,
-    mac_address,
     dt_instalacao,
     origem_predio,
     origem_sala,
@@ -18,7 +36,6 @@ const createDevice = (req, res) => {
   const device = new service.Device(
     nome,
     apelido,
-    mac_address,
     dt_instalacao,
     origem_predio,
     origem_sala,
@@ -35,7 +52,7 @@ const createDevice = (req, res) => {
     });
   }
 
-  device.createDevice().then((resul) => {
+  device.createDevice(id_cadastro).then((resul) => {
     if (resul.type === "error") {
       res.status(500).json({
         error: resul.message,
@@ -50,12 +67,24 @@ const createDevice = (req, res) => {
   return device;
 };
 
+const getAllDevicesCadastro = (req, res) => {
+  const device = new service.Device();
+
+  device.getAllDevicesCadastro().then((resul) => {
+    if (resul.type === "error") {
+      res.status(500).json({
+        error: resul.message,
+      });
+    } else {
+      res.status(200).json({
+        message: resul.message,
+      });
+    }
+  });
+};
+
 const getDevice = (req, res) => {
   const { nome, apelido, id } = req.headers;
-
-  console.log(req.headers);
-
-  console.log(nome);
 
   const device = new service.Device();
 
@@ -196,11 +225,57 @@ const deleteDevice = (req, res) => {
   });
 };
 
+const deleteCadastro = (req, res) => {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({
+      error: errors.errors[0].msg,
+    });
+  }
+
+  const { id } = req.body;
+
+  const device = new service.Device();
+
+  device.deleteCadastro(id).then((resul) => {
+    if (resul.type === "error") {
+      res.status(500).json({
+        error: resul.message,
+      });
+    } else {
+      res.status(200).json({
+        message: resul.message,
+      });
+    }
+  });
+};
+
+const getJWT = (req, res) => {
+  const device = new service.Device();
+
+  device.getJWT().then((resul) => {
+    if (resul.type === "error") {
+      res.status(500).json({
+        error: resul.message,
+      });
+    } else {
+      res.status(200).json({
+        message: resul.message,
+      });
+    }
+  });
+};
+
 module.exports = {
+  cadastroDevice,
   createDevice,
+  getAllDevicesCadastro,
   getDevice,
   getDevices,
   updateDevice,
   deleteDevice,
+  deleteCadastro,
+  getJWT,
   moveDevice,
 };

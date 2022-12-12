@@ -12,21 +12,20 @@ class User {
     this.role = cargo;
     this.email = email;
     this.password = senha;
+    this.db = sqlite.open({
+      filename: "./database/database.db",
+      driver: sqlite3.Database,
+    });
   }
 
   async createUser() {
     // Pegando a instancia do db
-    const db = await sqlite.open({
-      filename: "./database/database.db",
-      driver: sqlite3.Database,
-    });
+    const db = await this.db;
 
     // Pegando todos os usuários que possuem o email que o usuário informou
     const rowsEmailUser = await db.all(
       `SELECT * \ FROM users \ WHERE email = "${this.email}"`
     );
-
-    console.log(rowsEmailUser);
 
     if (rowsEmailUser[0]) {
       const error = {
@@ -37,10 +36,9 @@ class User {
     }
 
     // Encriptando a senha do usuário caso ele tenha passado a senha
-    if (this.password) {
-      const hashedPassword = await bcrypt.hash(this.password, 8);
-      this.password = hashedPassword;
-    }
+
+    const hashedPassword = await bcrypt.hash(this.password, 8);
+    this.password = hashedPassword;
 
     // Inserindo as informações no db
     const inserction = await db.run(
@@ -67,25 +65,29 @@ class User {
 
   async login(emailAuth, passwordAuth) {
     // Pegando a instancia do db
-    let passwordMatch;
     let token;
 
-    const db = await sqlite.open({
-      filename: "./database/database.db",
-      driver: sqlite3.Database,
-    });
+    const db = await this.db;
 
     const user = await db.get(`SELECT * FROM users WHERE email='${emailAuth}'`);
 
-    if (user) {
-      passwordMatch = await bcrypt.compare(passwordAuth, user.senha);
-    }
-
-    if (!passwordMatch) {
+    if (user.waiting) {
       const error = {
         type: "error",
-        message: "Invalid password",
+        message: "Usuário ainda não aprovado",
       };
+      return error;
+    }
+
+    if (user) {
+      let passwordMatch = await bcrypt.compare(passwordAuth, user.senha);
+      if (!passwordMatch) {
+        const error = {
+          type: "error",
+          message: "Invalid password",
+        };
+        return error;
+      }
     }
 
     token = await jwt.sign(
@@ -107,10 +109,7 @@ class User {
 
   async getUser(userId) {
     // Pegando a instancia do db
-    const db = await sqlite.open({
-      filename: "./database/database.db",
-      driver: sqlite3.Database,
-    });
+    const db = await this.db;
 
     const userInfo = await db.get(
       `SELECT * \ FROM users \ WHERE id = "${userId}"`
@@ -134,10 +133,7 @@ class User {
 
   async getUsers() {
     // Pegando a instancia do db
-    const db = await sqlite.open({
-      filename: "./database/database.db",
-      driver: sqlite3.Database,
-    });
+    const db = await this.db;
 
     const userInfo = await db.all(`SELECT * \ FROM users \ ORDER BY id DESC`);
 
@@ -159,10 +155,7 @@ class User {
 
   async editUser(userId, nome, setor, cargo, email) {
     // Pegando a instancia do db
-    const db = await sqlite.open({
-      filename: "./database/database.db",
-      driver: sqlite3.Database,
-    });
+    const db = await this.db;
 
     let queryComponent = [];
 
@@ -226,12 +219,44 @@ class User {
     return sucess;
   }
 
+  async editUserAdmin(is_admin, waiting, userId) {
+    const db = await this.db;
+
+    let queryComponent = [];
+
+    if (is_admin === 0 || is_admin === 1) {
+      queryComponent.push(`is_admin=${is_admin}`);
+    }
+    if (waiting === 0 || waiting === 1) {
+      queryComponent.push(`waiting=${waiting}`);
+    }
+
+    const queryJoined = queryComponent.join(",");
+
+    console.log(`UPDATE users SET ${queryJoined} WHERE id="${userId}"`);
+
+    const update = await db.run(
+      `UPDATE users SET ${queryJoined} WHERE id="${userId}"`
+    );
+    if (update.changes === 0) {
+      const error = {
+        type: "error",
+        message: "Database Error, please try again later",
+      };
+      return error;
+    }
+    //Informa a atualização
+    const sucess = {
+      type: "sucess",
+      message: "Informations Updated",
+    };
+
+    return sucess;
+  }
+
   async deleteUser(userId) {
     // Pegando a instancia do db
-    const db = await sqlite.open({
-      filename: "./database/database.db",
-      driver: sqlite3.Database,
-    });
+    const db = await this.db;
 
     if (!userId) {
       const error = {
@@ -247,6 +272,40 @@ class User {
 
     console.log(rowsId);
 
+    if (!rowsId) {
+      const error = {
+        type: "error",
+        message: "User not found",
+      };
+      return error;
+    }
+
+    //Efetua a deleção
+    const deletedUser = await db.run(`DELETE FROM users WHERE id="${userId}"`);
+    //Verifica se a chamada para o DB ocorreu sem problemas
+    if (deletedUser.changes == 0) {
+      const error = {
+        type: "error",
+        message: "Database Error, please try again later",
+      };
+      return error;
+    }
+    //Mostra a validação de que o usuário foi deletado
+    const sucess = {
+      type: "sucess",
+      message: "Informations Deleted",
+    };
+
+    return sucess;
+  }
+
+  async deleteUserAdmin(userId) {
+    // Pegando a instancia do db
+    const db = await this.db;
+
+    const rowsId = await db.get(
+      `SELECT * \ FROM users \ WHERE id = "${userId}"`
+    );
     if (!rowsId) {
       const error = {
         type: "error",

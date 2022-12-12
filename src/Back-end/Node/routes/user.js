@@ -4,7 +4,7 @@ const { body, validationResult } = require("express-validator");
 
 //Importações necessárias
 const userController = require("../controllers/user");
-const userAuth = require("../middlewares/auth");
+const { verifyToken, verifyAdmin } = require("../middlewares/auth");
 
 //ROTAS com seus respectivos controllers e middlewares
 
@@ -25,13 +25,22 @@ router.post(
   userController.login
 );
 
-router.get("/get", userAuth, userController.getUser);
+router.get("/get", verifyToken, userController.getUser);
 
-router.get("/getUsers", userAuth, userController.getUsers);
+router.get("/getUsers", verifyAdmin, userController.getUsers);
 
-router.put("/update", userAuth, userController.updateUser);
+router.put("/update", verifyToken, userController.updateUser);
 
-router.delete("/delete", userAuth, userController.deleteUser);
+router.put("/updateAdmin", verifyAdmin, userController.updateUserAdmin);
+
+router.delete("/delete", verifyToken, userController.deleteUser);
+
+router.delete(
+  "/deleteAdmin",
+  [body("id", "id de usuário é necessário").exists({ checkFalsy: true })],
+  verifyAdmin,
+  userController.deleteUserAdmin
+);
 
 //Exporta o ROUTER
 module.exports = router;

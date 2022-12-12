@@ -1,14 +1,11 @@
-const dbInstance = require("../database");
+const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const sqlite3 = require("sqlite3").verbose();
 const sqlite = require("sqlite");
-const { open } = require("sqlite");
-const { body } = require("express-validator");
 class Device {
   constructor(
     nome,
     apelido,
-    mac_address,
     dt_instalacao,
     origem_predio,
     origem_sala,
@@ -18,21 +15,77 @@ class Device {
   ) {
     (this.nome = nome),
       (this.apelido = apelido),
-      (this.macAddress = mac_address),
       (this.dtInstalacao = dt_instalacao),
       (this.origemPredio = origem_predio),
       (this.origemSala = origem_sala),
       (this.setorOrigem = setor_origem),
       (this.responsavel = responsavel),
-      (this.tipo = tipo);
+      (this.tipo = tipo),
+      (this.db = sqlite.open({
+        filename: "./database/database.db",
+        driver: sqlite3.Database,
+      }));
   }
 
-  async createDevice() {
+  async cadastroDevice(nome, mac_address) {
+    const db = await this.db;
+    mac_address;
+    const device = await db.get(
+      `SELECT * \ FROM cadastro_device \ WHERE mac_address="${mac_address}"`
+    );
+
+    if (device) {
+      const error = {
+        type: "error",
+        message: "Dispositivo já na fila de cadastro",
+      };
+      return error;
+    }
+
+    const insertion = await db.run(
+      `INSERT INTO cadastro_device (nome, mac_address) VALUES (?, ?)`,
+      [nome, mac_address]
+    );
+
+    if (!insertion.changes) {
+      const error = {
+        type: "error",
+        message: "Database error, try later",
+      };
+      return error;
+    }
+
+    const success = {
+      type: "success",
+      message: "Dispositivo inserido na fila de cadastro com sucesso",
+    };
+
+    return success;
+  }
+
+  async createDevice(id_cadastro) {
     // Pegando a instancia do db
-    const db = await sqlite.open({
-      filename: "./database/database.db",
-      driver: sqlite3.Database,
-    });
+    const db = await this.db;
+
+    const device_cadastro = await db.get(
+      `SELECT * \ FROM cadastro_device \ WHERE id="${id_cadastro}"`
+    );
+
+    if (!device_cadastro) {
+      const error = {
+        type: "error",
+        message: "Disposivo não existente na fila de cadastro",
+      };
+      return error;
+    }
+
+    if (!device_cadastro.mac_address) {
+      const error = {
+        type: "error",
+        message: "Disposivo não possui um mac_address válido",
+      };
+      return error;
+    }
 
     // Pegando todos os dispositivos que possuem o nome que o usuário informou
     const rowsNamesDevices = await db.all(
@@ -47,13 +100,25 @@ class Device {
       return error;
     }
 
+    const rowsMacAddressDevices = await db.get(
+      `SELECT * \ FROM device \ WHERE mac_address = "${device_cadastro.mac_address}"`
+    );
+
+    if (rowsMacAddressDevices) {
+      const error = {
+        type: "error",
+        message: "Dispositivo com esse mac_address já existente",
+      };
+      return error;
+    }
+
     // Inserindo as informações no db
     const inserction = await db.run(
       "INSERT INTO device (nome, apelido, mac_address, dt_instalacao, origem_predio, origem_sala, setor_origem, responsavel, tipo) VALUES (?,?,?,?,?,?,?,?,?)",
       [
         this.nome,
         this.apelido,
-        this.macAddress,
+        device_cadastro.mac_address,
         this.dtInstalacao,
         this.origemPredio,
         this.origemSala,
@@ -72,6 +137,20 @@ class Device {
       return error;
     }
 
+    const removal = await db.run(
+      `DELETE \ FROM cadastro_device \ WHERE id="${id_cadastro}"`
+    );
+
+    if (!removal.changes) {
+      const error = {
+        type: "error",
+        message:
+          "Dispositivos cadastrado com sucesso, mas não foi possível de remover o dispositivo da fila de cadastro, favor remové-lo novamente",
+      };
+
+      return error;
+    }
+
     const sucess = {
       type: "sucess",
       message: "Device created with sucess",
@@ -80,8 +159,31 @@ class Device {
     return sucess;
   }
 
-  async getDevice(nome, apelido, id) {
-    if (!nome && !apelido && !id) {
+  async getAllDevicesCadastro() {
+    const db = await this.db;
+
+    const devices = await db.all(
+      `SELECT * \ FROM cadastro_device \ ORDER BY id DESC`
+    );
+
+    if (!devices[0]) {
+      const success = {
+        type: "success",
+        message: "Nenhum dispositivo na fila de cadastro",
+      };
+      return success;
+    }
+
+    const success = {
+      type: "success",
+      message: devices,
+    };
+
+    return success;
+  }
+
+  async getDevice(nome, apelido, id, mac_address) {
+    if (!nome && !apelido && !id && !mac_address) {
       const error = {
         type: "error",
         message: "Nothing passed to search",
@@ -89,10 +191,7 @@ class Device {
       return error;
     }
     // Pegando a instancia do db
-    const db = await sqlite.open({
-      filename: "./database/database.db",
-      driver: sqlite3.Database,
-    });
+    const db = await this.db;
 
     if (nome) {
       const deviceInfo = await db.all(
@@ -150,10 +249,7 @@ class Device {
 
   async getDevices() {
     // Pegando a instancia do db
-    const db = await sqlite.open({
-      filename: "./database/database.db",
-      driver: sqlite3.Database,
-    });
+    const db = await this.db;
 
     const devicesInfo = await db.all(
       `SELECT * \ FROM device \ ORDER BY id DESC`
@@ -217,10 +313,7 @@ class Device {
       return error;
     }
     // Pegando a instancia do db
-    const db = await sqlite.open({
-      filename: "./database/database.db",
-      driver: sqlite3.Database,
-    });
+    const db = await this.db;
 
     let queryComponent = [];
 
@@ -314,10 +407,7 @@ class Device {
 
   async moveDevice(mac_address_router, mac_address_moved) {
     // Pegando a instancia do db
-    const db = await sqlite.open({
-      filename: "./database/database.db",
-      driver: sqlite3.Database,
-    });
+    const db = await this.db;
 
     const routerDevice = await db.get(
       `SELECT * \ FROM device \ WHERE mac_address = "${mac_address_router}"`
@@ -377,11 +467,7 @@ class Device {
 
   async deleteDevice(id) {
     // Pegando a instancia do db
-    const db = await sqlite.open({
-      filename: "./database/database.db",
-      driver: sqlite3.Database,
-    });
-
+    const db = await this.db;
     if (!id) {
       const error = {
         type: "error",
@@ -414,6 +500,52 @@ class Device {
     const sucess = {
       type: "sucess",
       message: "Informations Deleted",
+    };
+
+    return sucess;
+  }
+
+  async deleteCadastro(id) {
+    const db = await this.db;
+
+    const device = await db.get(
+      `SELECT * \ FROM cadastro_device \ WHERE id="${id}"`
+    );
+
+    if (!device) {
+      const error = {
+        typer: "error",
+        message: "Dispositivo não se encontra na fila",
+      };
+      return error;
+    }
+
+    const insertions = await db.run(
+      `DELETE \ FROM cadastro_device \ WHERE id="${id}"`
+    );
+
+    if (!insertions.changes) {
+      const error = {
+        type: "error",
+        message: "Database error, try later",
+      };
+      return error;
+    }
+  }
+
+  async getJWT() {
+    let token;
+
+    token = await jwt.sign(
+      {
+        name: 999999,
+      },
+      process.env.JWT_SECRET
+    );
+
+    const sucess = {
+      type: "success",
+      message: token,
     };
 
     return sucess;

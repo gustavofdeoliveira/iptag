@@ -4,18 +4,20 @@ const { body, validationResult } = require("express-validator");
 
 //Importações necessárias
 const deviceController = require("../controllers/device");
-const userAuth = require("../middlewares/auth");
+const { verifyToken, verifyAdmin } = require("../middlewares/auth");
 
 //ROTAS com seus respectivos controllers e middlewares
 
+router.post("/cadastro", verifyToken, deviceController.cadastroDevice);
+
 router.post(
   "/create",
-  [body("nome", "nome é necessário").exists({ checkFalsy: true })],
   [
-    body("mac_address", "mac address do dispositivo é necessário").exists({
+    body("id_cadastro", "id do dispositivo na fila é necessário").exists({
       checkFalsy: true,
     }),
   ],
+  [body("nome", "nome é necessário").exists({ checkFalsy: true })],
   [
     body(
       "dt_instalacao",
@@ -50,7 +52,7 @@ router.post(
       checkFalsy: true,
     }),
   ],
-  userAuth,
+  verifyAdmin,
   deviceController.createDevice
 );
 
@@ -71,18 +73,29 @@ router.post(
   deviceController.moveDevice
 );
 
-router.get("/get", userAuth, deviceController.getDevice);
+router.get("/getCadastro", verifyAdmin, deviceController.getAllDevicesCadastro);
 
-router.get("/getDevices", userAuth, deviceController.getDevices);
+router.get("/get", verifyToken, deviceController.getDevice);
+
+router.get("/getDevices", verifyToken, deviceController.getDevices);
+
+router.get("/getJWT", verifyAdmin, deviceController.getJWT);
 
 router.put(
   "/update",
   [body("id", "id é necessário").exists({ checkFalsy: true })],
-  userAuth,
+  verifyToken,
   deviceController.updateDevice
 );
 
-router.delete("/delete", userAuth, deviceController.deleteDevice);
+router.delete("/delete", verifyToken, deviceController.deleteDevice);
+
+router.delete(
+  "/deleteCadastro",
+  [body("id", "id é necessário").exists({ checkFalsy: true })],
+  verifyAdmin,
+  deviceController.deleteCadastro
+);
 
 //Exporta o ROUTER
 module.exports = router;
