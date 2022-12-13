@@ -4,7 +4,11 @@ const { body, validationResult } = require("express-validator");
 
 //Importações necessárias
 const userController = require("../controllers/user");
-const { verifyToken, verifyAdmin } = require("../middlewares/auth");
+const {
+  verifyToken,
+  verifyAdmin,
+  verifyDevice,
+} = require("../middlewares/auth");
 
 //ROTAS com seus respectivos controllers e middlewares
 
@@ -15,6 +19,7 @@ router.post(
   [body("cargo", "cargo é necessário").exists({ checkFalsy: true })],
   [body("email", "email é necessário").exists({ checkFalsy: true })],
   [body("senha", "senha é necessária").exists({ checkFalsy: true })],
+  verifyAdmin,
   userController.createUser
 );
 

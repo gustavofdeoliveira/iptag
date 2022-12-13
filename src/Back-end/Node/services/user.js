@@ -70,14 +70,6 @@ class User {
     const db = await this.db;
 
     const user = await db.get(`SELECT * FROM users WHERE email='${emailAuth}'`);
-    console.log(user.waiting);
-    // if (user.waiting) {
-    //   const error = {
-    //     type: "error",
-    //     message: "Usuário ainda não aprovado",
-    //   };
-    //   return error;
-    // }
 
     if (user) {
       let passwordMatch = await bcrypt.compare(passwordAuth, user.senha);
@@ -226,9 +218,6 @@ class User {
 
     if (is_admin === 0 || is_admin === 1) {
       queryComponent.push(`is_admin=${is_admin}`);
-    }
-    if (waiting === 0 || waiting === 1) {
-      queryComponent.push(`waiting=${waiting}`);
     }
 
     const queryJoined = queryComponent.join(",");

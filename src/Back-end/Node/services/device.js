@@ -541,24 +541,6 @@ class Device {
     }
   }
 
-  async getJWT() {
-    let token;
-
-    token = await jwt.sign(
-      {
-        name: 999999,
-      },
-      process.env.JWT_SECRET
-    );
-
-    const sucess = {
-      type: "success",
-      message: token,
-    };
-
-    return sucess;
-  }
-
   async sendDevice(mac_address) {
     var client = mqtt.connect(options);
     

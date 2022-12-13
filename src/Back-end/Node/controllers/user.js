@@ -110,7 +110,7 @@ const updateUser = (req, res) => {
 };
 
 const updateUserAdmin = (req, res) => {
-  const { is_admin, waiting, userId } = req.body;
+  const { is_admin, userId } = req.body;
 
   const user = new service.User();
 

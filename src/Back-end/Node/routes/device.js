@@ -4,11 +4,15 @@ const { body, validationResult } = require("express-validator");
 
 //Importações necessárias
 const deviceController = require("../controllers/device");
-const { verifyToken, verifyAdmin } = require("../middlewares/auth");
+const {
+  verifyToken,
+  verifyAdmin,
+  verifyDevice,
+} = require("../middlewares/auth");
 
 //ROTAS com seus respectivos controllers e middlewares
 
-router.post("/cadastro", verifyToken, deviceController.cadastroDevice);
+router.post("/cadastro", verifyDevice, deviceController.cadastroDevice);
 
 router.post(
   "/create",
@@ -70,6 +74,7 @@ router.post(
       "mac address do dispositivo que se moveu é necessário"
     ).exists({ checkFalsy: true }),
   ],
+  verifyDevice,
   deviceController.moveDevice
 );
 
@@ -79,16 +84,14 @@ router.get("/get", verifyToken, deviceController.getDevice);
 
 router.get("/getDevices", verifyToken, deviceController.getDevices);
 
-router.get("/getJWT", verifyAdmin, deviceController.getJWT);
-
 router.put(
   "/update",
   [body("id", "id é necessário").exists({ checkFalsy: true })],
-  verifyToken,
+  verifyAdmin,
   deviceController.updateDevice
 );
 
-router.delete("/delete", verifyToken, deviceController.deleteDevice);
+router.delete("/delete", verifyAdmin, deviceController.deleteDevice);
 
 router.delete(
   "/deleteCadastro",
@@ -97,7 +100,7 @@ router.delete(
   deviceController.deleteCadastro
 );
 
-router.post("/send", verifyToken, deviceController.sendDevice)
+router.post("/send", verifyToken, deviceController.sendDevice);
 
 //Exporta o ROUTER
 module.exports = router;
