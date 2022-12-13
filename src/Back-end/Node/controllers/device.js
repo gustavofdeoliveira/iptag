@@ -272,14 +272,16 @@ const sendDevice = (req, res) => {
 
   const device = new service.Device();
 
+
   device.sendDevice(mac_address).then((resul) => {
-    if (resul.type === "error") {
+    if (resul === "error") {
       res.status(500).json({
         error: resul.message,
       });
     } else {
+      console.log(resul);
       res.status(200).json({
-        message: resul.message,
+        message: resul,
       });
     }
   });
