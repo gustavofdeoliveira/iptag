@@ -543,10 +543,10 @@ class Device {
 
   async sendDevice(mac_address) {
     var client = mqtt.connect(options);
-    
+
     if (client) {
       console.log("foi")
-      client.publish('BUZZER', `{ "mac_address": "${mac_address} }`);
+      client.publish('BUZZER', `{ "mac_address": "${mac_address}" }`);
     }
     if (!client) {
       return "Error";
