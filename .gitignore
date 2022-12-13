@@ -33,3 +33,4 @@
 .DS_Store
 src/Back-end/Node/.env
 src/Back-end/node_modules
+src/Back-end/.env

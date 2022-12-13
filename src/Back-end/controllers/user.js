@@ -114,7 +114,7 @@ const updateUserAdmin = (req, res) => {
 
   const user = new service.User();
 
-  user.editUserAdmin(is_admin, waiting, userId).then((resul) => {
+  user.editUserAdmin(is_admin, userId).then((resul) => {
     if (resul.type === "error") {
       res.status(500).json({
         error: resul.message,

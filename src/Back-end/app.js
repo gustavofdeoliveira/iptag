@@ -23,10 +23,9 @@ const deviceRouter = require("./routes/device");
 app.use("/user", userRouter);
 app.use("/device", deviceRouter);
 
-app.use(express.static("../../Front-end"));
+app.use(express.static("../Front-end"));
 app.use((err, req, res, next) => {
   if (err instanceof Error) {
-    console.log();
     res.status(500).json({
       error: err.message,
     });

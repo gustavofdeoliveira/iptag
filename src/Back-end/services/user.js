@@ -211,7 +211,7 @@ class User {
     return sucess;
   }
 
-  async editUserAdmin(is_admin, waiting, userId) {
+  async editUserAdmin(is_admin, userId) {
     const db = await this.db;
 
     let queryComponent = [];
