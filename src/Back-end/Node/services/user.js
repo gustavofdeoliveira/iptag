@@ -70,14 +70,14 @@ class User {
     const db = await this.db;
 
     const user = await db.get(`SELECT * FROM users WHERE email='${emailAuth}'`);
-
-    if (user.waiting) {
-      const error = {
-        type: "error",
-        message: "Usuário ainda não aprovado",
-      };
-      return error;
-    }
+    console.log(user.waiting);
+    // if (user.waiting) {
+    //   const error = {
+    //     type: "error",
+    //     message: "Usuário ainda não aprovado",
+    //   };
+    //   return error;
+    // }
 
     if (user) {
       let passwordMatch = await bcrypt.compare(passwordAuth, user.senha);

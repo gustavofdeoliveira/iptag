@@ -97,5 +97,7 @@ router.delete(
   deviceController.deleteCadastro
 );
 
+router.post("/send", verifyToken, deviceController.sendDevice)
+
 //Exporta o ROUTER
 module.exports = router;

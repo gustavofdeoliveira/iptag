@@ -19,7 +19,6 @@ function verifyLogin() {
                 console.log(msg);
                 window.location.href = '/view/dashboard.html'
             }).fail(function (err) {
-                window.location.href = '/view/login.html'
                 errorMessage(err.responseJSON.error)
             })
     }

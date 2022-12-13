@@ -2,6 +2,14 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const sqlite3 = require("sqlite3").verbose();
 const sqlite = require("sqlite");
+var mqtt = require("mqtt");
+var options = {
+  host: process.env.HOST,
+  port: 8883,
+  protocol: 'mqtts',
+  username: process.env.USERNAME,
+  password: process.env.PASSWORD
+}
 class Device {
   constructor(
     nome,
@@ -549,6 +557,25 @@ class Device {
     };
 
     return sucess;
+  }
+
+  async sendDevice(mac_address) {
+    var client = mqtt.connect(options);
+    
+    client.on('connect', function () {
+      console.log('Connected');
+    });
+    client.on('error', function (error) {
+      console.log(error);
+    });
+    
+    if (client) {
+      console.log("foi")
+      client.publish('BUZZER', `{ "mac_address": "${mac_address} }`);
+    }
+    if (!client) {
+      return "Error";
+    }
   }
 }
 module.exports = { Device };

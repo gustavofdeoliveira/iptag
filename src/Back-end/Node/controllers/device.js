@@ -267,6 +267,24 @@ const getJWT = (req, res) => {
   });
 };
 
+const sendDevice = (req, res) => {
+  const {mac_address } = req.body;
+
+  const device = new service.Device();
+
+  device.sendDevice(mac_address).then((resul) => {
+    if (resul.type === "error") {
+      res.status(500).json({
+        error: resul.message,
+      });
+    } else {
+      res.status(200).json({
+        message: resul.message,
+      });
+    }
+  });
+};
+
 module.exports = {
   cadastroDevice,
   createDevice,
@@ -278,4 +296,5 @@ module.exports = {
   deleteCadastro,
   getJWT,
   moveDevice,
+  sendDevice
 };
