@@ -30,7 +30,7 @@
 
 
 <body style="display: flex;" id="body-pd">
- 
+
   <!--Container Main start-->
   <main class="contaner d-flex align-items-center">
     <div class="col-sm-12">
@@ -48,14 +48,13 @@
                 <div class="row justify-content-center">
                   <label class="input-file" for="image">Carregar imagem</label>
                   <label class="input-file-name" id="image-name"></label>
-                  <input type="file"  id="image">
+                  <input type="file" id="image">
                 </div>
 
                 <div class="row mt-4">
                   <div class="col-sm-12">
                     <div class="form-group">
-                      <input type="text" class="white-card-input" id="nome" aria-describedby="nome"
-                        placeholder="Nome*">
+                      <input type="text" class="white-card-input" id="nome" aria-describedby="nome" placeholder="Nome*">
                     </div>
                   </div>
                   <div class="col-sm-12">
@@ -85,9 +84,11 @@
                       <input type="text" class="white-card-input" id="senha" aria-describedby="senha"
                         placeholder="Senha*">
                     </div>
-                  </div>    
+                  </div>
                 </div>
-                
+                <div class="row mt-4">
+                  <div class="col-sm-12" id="erros"></div>
+                </div>
                 <div class="row mt-4">
                   <div class="col-sm-12 ">
                     <div class="row justify-content-center">
@@ -96,7 +97,8 @@
                           Voltar</button>
                       </div>
                       <div class="col-sm-12 col-md-6">
-                        <button onclick="verifyCreate()" class="btn-blue"><i class="fa fa-floppy-o" aria-hidden="true"></i> Salvar</button>
+                        <button onclick="verifyCreate()" class="btn-blue"><i class="fa fa-floppy-o"
+                            aria-hidden="true"></i> Salvar</button>
                       </div>
                     </div>
                   </div>
@@ -117,9 +119,12 @@
   <!--Container Main end-->
 
 </body>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+  integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+  integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+  integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 <script type='text/javascript'
   src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js'></script>
 <script type='text/javascript' src='../js/scripts.js'></script>

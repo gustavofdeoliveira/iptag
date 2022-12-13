@@ -249,6 +249,10 @@ p {
   color: var(--black);
   padding: 8px;
 }
+.white-card-input:focus{
+  border-bottom: 2px solid var(--blue-100) !important;
+  outline: none;
+}
 
 #option {
   background-color: var(--white) !important;

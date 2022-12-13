@@ -21,12 +21,16 @@ function verifyCreate() {
                 senha: $("#senha").val()
             }, success: async function (resul) {
                 console.log(resul.message)
-                
+
             },
             error: function (err) {
                 window.location.href = '/view/register-user.html'
                 console.log(msg);
             }
         })
+    } else {
+        document.getElementById('erros').innerHTML += `<div class="alert alert-danger" role="alert">
+        Campos obrigatórios vazios!
+      </div>`;
     }
 }
