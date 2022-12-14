@@ -44,7 +44,7 @@ const login = (req, res) => {
 
   user.login(email, senha).then((resul) => {
     if (resul.type === "error") {
-      res.status(500).json({
+      res.status(400).json({
         error: resul.message,
       });
     } else {

@@ -2,8 +2,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const dbInstance = require("../database");
 require("dotenv").config();
-const sqlite3 = require("sqlite3").verbose();
-const sqlite = require("sqlite");
+const sqlite3 = require("sqlite3");
 const { open } = require("sqlite");
 class User {
   constructor(nome, setor, cargo, email, senha) {
@@ -12,7 +11,7 @@ class User {
     this.role = cargo;
     this.email = email;
     this.password = senha;
-    this.db = sqlite.open({
+    this.db = open({
       filename: "./database/database.db",
       driver: sqlite3.Database,
     });
@@ -69,19 +68,28 @@ class User {
 
     const db = await this.db;
 
-    const user = await db.get(`SELECT * FROM users WHERE email='${emailAuth}'`);
+    const user = await db.get(
+      `SELECT * \ FROM users \ WHERE email='${emailAuth}'`
+    );
 
-    if (user) {
-      let passwordMatch = await bcrypt.compare(passwordAuth, user.senha);
-      if (!passwordMatch) {
-        const error = {
-          type: "error",
-          message: "Invalid password",
-        };
-        return error;
-      }
+    console.log(user);
+
+    if (!user) {
+      const error = {
+        type: "error",
+        message: "User does't exists",
+      };
+      return error;
     }
 
+    let passwordMatch = await bcrypt.compare(passwordAuth, user.senha);
+    if (!passwordMatch) {
+      const error = {
+        type: "error",
+        message: "Invalid password",
+      };
+      return error;
+    }
     token = await jwt.sign(
       {
         name: user.id,
