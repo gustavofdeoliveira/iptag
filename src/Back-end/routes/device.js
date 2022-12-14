@@ -101,6 +101,7 @@ router.delete(
 );
 
 router.post("/send", verifyToken, deviceController.sendDevice);
+router.post("/batery", verifyToken, deviceController.bateryDevice);
 
 //Exporta o ROUTER
 module.exports = router;

@@ -558,5 +558,25 @@ class Device {
       return "Error";
     }
   }
+  async bateryDevice(mac_address, batery) {
+
+    const update = await db.run(
+      `UPDATE device \ SET  bateria = ${batery} \ WHERE mac_address="${mac_address}"`
+    );
+    if (update.changes === 0) {
+      const error = {
+        type: "error",
+        message: "Database Error, please try again later",
+      };
+      return error;
+    }
+    //Informa a atualização
+    const sucess = {
+      type: "sucess",
+      message: "Informations Updated",
+    };
+
+    return sucess;
+  }
 }
 module.exports = { Device };

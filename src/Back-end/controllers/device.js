@@ -268,6 +268,26 @@ const sendDevice = (req, res) => {
       });
     }
   });
+
+};
+
+const bateryDevice = (req, res) => {
+  const { mac_address, batery } = req.body;
+
+  const device = new service.Device();
+
+  device.bateryDevice(mac_address, batery).then((resul) => {
+    if (resul === "error") {
+      res.status(500).json({
+        error: resul.message,
+      });
+    } else {
+      console.log(resul);
+      res.status(200).json({
+        message: resul,
+      });
+    }
+  });
 };
 
 module.exports = {
@@ -281,4 +301,5 @@ module.exports = {
   deleteCadastro,
   moveDevice,
   sendDevice,
+  bateryDevice
 };

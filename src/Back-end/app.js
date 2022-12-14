@@ -15,7 +15,7 @@ app.use(
   })
 );
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 
 const userRouter = require("./routes/user");
 const deviceRouter = require("./routes/device");
