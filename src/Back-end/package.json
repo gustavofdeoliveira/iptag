@@ -16,5 +16,17 @@
   "bugs": {
     "url": "https://github.com/2022M4T1-Inteli/Projeto1/issues"
   },
-  "homepage": "https://github.com/2022M4T1-Inteli/Projeto1#readme"
+  "homepage": "https://github.com/2022M4T1-Inteli/Projeto1#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-async-errors": "^3.1.1",
+    "express-validator": "^6.14.2",
+    "jsonwebtoken": "^8.5.1",
+    "mqtt": "^4.3.7",
+    "sqlite": "^4.1.2",
+    "sqlite3": "^5.1.4"
+  }
 }
