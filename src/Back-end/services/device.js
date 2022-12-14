@@ -6,11 +6,11 @@ const sqlite = require("sqlite");
 const mqtt = require("mqtt");
 
 const options = {
-  host: '8c714ce31a3c43c8ba932790cd7e6ddd.s1.eu.hivemq.cloud',
+  host: '602ff603e70c4e1b9a8888b7ee2c2402.s1.eu.hivemq.cloud',
   port: 8883,
   protocol: 'mqtts',
   username: 'gabcarneiro',
-  password: 'gtes^OVZfB6r'
+  password: 'MR.mZ_Y8v46xxJE'
 }
 
 class Device {
