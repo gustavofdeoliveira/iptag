@@ -1,5 +1,5 @@
 const service = require("../services/user");
-const { body, validationResult } = require("express-validator");
+const { validationResult } = require("express-validator");
 require("express-async-errors");
 
 const createUser = (req, res) => {
@@ -14,19 +14,17 @@ const createUser = (req, res) => {
     });
   }
 
-  user.createUser().then((resul) => {
-    if (resul.type === "error") {
-      res.status(500).json({
-        error: resul.message,
-      });
-    } else {
+  try {
+    user.createUser().then((resul) => {
       res.status(200).json({
         message: resul.message,
       });
-    }
-  });
-
-  return user;
+    });
+  } catch (err) {
+    res.status(500).json({
+      error: err.message,
+    });
+  }
 };
 
 const login = (req, res) => {
@@ -42,18 +40,18 @@ const login = (req, res) => {
 
   const user = new service.User();
 
-  user.login(email, senha).then((resul) => {
-    if (resul.type === "error") {
-      res.status(400).json({
-        error: resul.message,
-      });
-    } else {
+  try {
+    user.login(email, senha).then((resul) => {
       res.status(200).json({
         message: resul.message,
         token: resul.token,
       });
-    }
-  });
+    });
+  } catch (err) {
+    res.status(400).json({
+      error: err.message,
+    });
+  }
 };
 
 const getUser = (req, res) => {
@@ -61,33 +59,33 @@ const getUser = (req, res) => {
 
   const user = new service.User();
 
-  user.getUser(userId).then((resul) => {
-    if (resul.type === "error") {
-      res.status(500).json({
-        error: resul.message,
-      });
-    } else {
+  try {
+    user.getUser(userId).then((resul) => {
       res.status(200).json({
         message: resul.message,
       });
-    }
-  });
+    });
+  } catch (err) {
+    res.status(500).json({
+      error: err.message,
+    });
+  }
 };
 
 const getUsers = (req, res) => {
   const user = new service.User();
 
-  user.getUsers().then((resul) => {
-    if (resul.type === "error") {
-      res.status(500).json({
-        error: resul.message,
-      });
-    } else {
+  try {
+    user.getUsers().then((resul) => {
       res.status(200).json({
         message: resul.message,
       });
-    }
-  });
+    });
+  } catch (err) {
+    res.status(500).json({
+      error: err.message,
+    });
+  }
 };
 
 const updateUser = (req, res) => {
@@ -96,17 +94,17 @@ const updateUser = (req, res) => {
 
   const user = new service.User();
 
-  user.editUser(userId, nome, setor, cargo, email).then((resul) => {
-    if (resul.type === "error") {
-      res.status(500).json({
-        error: resul.message,
-      });
-    } else {
+  try {
+    user.editUser(userId, nome, setor, cargo, email).then((resul) => {
       res.status(200).json({
         message: resul.message,
       });
-    }
-  });
+    });
+  } catch (err) {
+    res.status(500).json({
+      error: err.message,
+    });
+  }
 };
 
 const updateUserAdmin = (req, res) => {
@@ -114,17 +112,17 @@ const updateUserAdmin = (req, res) => {
 
   const user = new service.User();
 
-  user.editUserAdmin(is_admin, userId).then((resul) => {
-    if (resul.type === "error") {
-      res.status(500).json({
-        error: resul.message,
-      });
-    } else {
+  try {
+    user.editUserAdmin(is_admin, userId).then((resul) => {
       res.status(200).json({
         message: resul.message,
       });
-    }
-  });
+    });
+  } catch (err) {
+    res.status(500).json({
+      error: err.message,
+    });
+  }
 };
 
 const deleteUser = (req, res) => {
@@ -132,20 +130,22 @@ const deleteUser = (req, res) => {
 
   const user = new service.User();
 
-  user.deleteUser(userId).then((resul) => {
-    if (resul.type === "error") {
-      res.status(500).json({
-        error: resul.message,
-      });
-    } else {
+  try {
+    user.deleteUser(userId).then((resul) => {
       res.status(200).json({
         message: resul.message,
       });
-    }
-  });
+    });
+  } catch (err) {
+    res.status(500).json({
+      error: err.message,
+    });
+  }
 };
 
 const deleteUserAdmin = (req, res) => {
+  const { id } = req.body;
+
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
@@ -154,21 +154,19 @@ const deleteUserAdmin = (req, res) => {
     });
   }
 
-  const { id } = req.body;
-
   const user = new service.User();
 
-  user.deleteUserAdmin(id).then((resul) => {
-    if (resul.type === "error") {
-      res.status(500).json({
-        error: resul.message,
-      });
-    } else {
+  try {
+    user.deleteUserAdmin(id).then((resul) => {
       res.status(200).json({
         message: resul.message,
       });
-    }
-  });
+    });
+  } catch (err) {
+    res.status(500).json({
+      error: err.message,
+    });
+  }
 };
 
 module.exports = {

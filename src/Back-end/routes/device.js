@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { body, validationResult } = require("express-validator");
+const { body } = require("express-validator");
 
 //Importações necessárias
 const deviceController = require("../controllers/device");
@@ -12,7 +12,21 @@ const {
 
 //ROTAS com seus respectivos controllers e middlewares
 
-router.post("/cadastro", verifyDevice, deviceController.cadastroDevice);
+router.post(
+  "/cadastro",
+  [
+    body("nome", "Nome do dispositivo é necessário").exists({
+      checkFalsy: true,
+    }),
+  ],
+  [
+    body("mac_address", "Mac address do dispositivo é necessário").exists({
+      checkFalsy: true,
+    }),
+  ],
+  verifyDevice,
+  deviceController.cadastroDevice
+);
 
 router.post(
   "/create",

@@ -6,12 +6,12 @@ const sqlite = require("sqlite");
 const mqtt = require("mqtt");
 
 const options = {
-  host: '602ff603e70c4e1b9a8888b7ee2c2402.s1.eu.hivemq.cloud',
+  host: "602ff603e70c4e1b9a8888b7ee2c2402.s1.eu.hivemq.cloud",
   port: 8883,
-  protocol: 'mqtts',
-  username: 'gabcarneiro',
-  password: 'MR.mZ_Y8v46xxJE'
-}
+  protocol: "mqtts",
+  username: "gabcarneiro",
+  password: "MR.mZ_Y8v46xxJE",
+};
 
 class Device {
   constructor(
@@ -46,11 +46,7 @@ class Device {
     );
 
     if (device) {
-      const error = {
-        type: "error",
-        message: "Dispositivo já na fila de cadastro",
-      };
-      return error;
+      throw new Error("Dispositivo já na fila de cadastro");
     }
 
     const insertion = await db.run(
@@ -59,11 +55,7 @@ class Device {
     );
 
     if (!insertion.changes) {
-      const error = {
-        type: "error",
-        message: "Database error, try later",
-      };
-      return error;
+      throw new Error("Database error, try later");
     }
 
     const success = {
@@ -83,19 +75,11 @@ class Device {
     );
 
     if (!device_cadastro) {
-      const error = {
-        type: "error",
-        message: "Disposivo não existente na fila de cadastro",
-      };
-      return error;
+      throw new Error("Disposivo não existente na fila de cadastro");
     }
 
     if (!device_cadastro.mac_address) {
-      const error = {
-        type: "error",
-        message: "Disposivo não possui um mac_address válido",
-      };
-      return error;
+      throw new Error("Disposivo não possui um mac_address válido");
     }
 
     // Pegando todos os dispositivos que possuem o nome que o usuário informou
@@ -104,11 +88,7 @@ class Device {
     );
 
     if (rowsNamesDevices[0]) {
-      const error = {
-        type: "error",
-        message: "Dispositivo já existente",
-      };
-      return error;
+      throw new Error("Dispositivo já existente");
     }
 
     const rowsMacAddressDevices = await db.get(
@@ -116,11 +96,7 @@ class Device {
     );
 
     if (rowsMacAddressDevices) {
-      const error = {
-        type: "error",
-        message: "Dispositivo com esse mac_address já existente",
-      };
-      return error;
+      throw new Error("Dispositivo com esse mac_address já existente");
     }
 
     // Inserindo as informações no db
@@ -141,11 +117,7 @@ class Device {
 
     // Checando se todas as informações foram inseridas no db
     if (inserction.changes === 0) {
-      const error = {
-        type: "error",
-        message: "Database error",
-      };
-      return error;
+      throw new Error("Database error");
     }
 
     const removal = await db.run(
@@ -153,13 +125,9 @@ class Device {
     );
 
     if (!removal.changes) {
-      const error = {
-        type: "error",
-        message:
-          "Dispositivos cadastrado com sucesso, mas não foi possível de remover o dispositivo da fila de cadastro, favor remové-lo novamente",
-      };
-
-      return error;
+      throw new Error(
+        "Dispositivos cadastrado com sucesso, mas não foi possível de remover o dispositivo da fila de cadastro, favor remové-lo novamente"
+      );
     }
 
     const sucess = {
@@ -178,11 +146,7 @@ class Device {
     );
 
     if (!devices[0]) {
-      const success = {
-        type: "success",
-        message: "Nenhum dispositivo na fila de cadastro",
-      };
-      return success;
+      throw new Error("Nenhum dispositivo na fila de cadastro");
     }
 
     const success = {
@@ -195,11 +159,7 @@ class Device {
 
   async getDevice(nome, apelido, id, mac_address) {
     if (!nome && !apelido && !id && !mac_address) {
-      const error = {
-        type: "error",
-        message: "Nothing passed to search",
-      };
-      return error;
+      throw new Error("Nothing passed to search");
     }
     // Pegando a instancia do db
     const db = await this.db;
@@ -209,11 +169,7 @@ class Device {
         `SELECT * \ FROM device \ WHERE nome = "${nome}"`
       );
       if (!deviceInfo[0]) {
-        const error = {
-          type: "error",
-          message: "Nothing found for this device",
-        };
-        return error;
+        throw new Error("Nothing found for this device");
       }
       const sucess = {
         type: "sucess",
@@ -226,11 +182,7 @@ class Device {
         `SELECT * \ FROM device \ WHERE apelido = "${apelido}"`
       );
       if (!deviceInfo[0]) {
-        const error = {
-          type: "error",
-          message: "Nothing found for this device",
-        };
-        return error;
+        throw new Error("Nothing found for this device");
       }
       const sucess = {
         type: "sucess",
@@ -243,11 +195,7 @@ class Device {
         `SELECT * \ FROM device \ WHERE id = "${id}"`
       );
       if (!deviceInfo[0]) {
-        const error = {
-          type: "error",
-          message: "Nothing found for this device",
-        };
-        return error;
+        throw new Error("Nothing found for this device");
       }
       const sucess = {
         type: "sucess",
@@ -267,11 +215,7 @@ class Device {
     );
 
     if (!devicesInfo) {
-      const error = {
-        type: "error",
-        message: "Nothing found",
-      };
-      return error;
+      throw new Error("Nothing found");
     }
 
     const sucess = {
@@ -317,11 +261,7 @@ class Device {
       !hr_rastreio &&
       !dt_atualizacao
     ) {
-      const error = {
-        type: "error",
-        message: "Nothing to update",
-      };
-      return error;
+      throw new Error("Nothing to update");
     }
     // Pegando a instancia do db
     const db = await this.db;
@@ -331,11 +271,7 @@ class Device {
     const device = await db.get(`SELECT * \ FROM device \ WHERE id = "${id}"`);
 
     if (!device) {
-      const error = {
-        type: "error",
-        message: "Nothing in the database from this device",
-      };
-      return error;
+      throw new Error("Nothing in the database from this device");
     }
 
     if (nome) {
@@ -343,11 +279,7 @@ class Device {
         `SELECT * \ FROM device \ WHERE nome = "${nome}" AND id != "${id}"`
       );
       if (device[0]) {
-        const error = {
-          type: "error",
-          message: "This name already exist",
-        };
-        return error;
+        throw new Error("This name already exist");
       } else {
         queryComponent.push(`nome="${nome}"`);
       }
@@ -401,11 +333,7 @@ class Device {
       `UPDATE device \ SET ${queryJoined}, dt_atualizacao = Date('now', 'localtime') \ WHERE id="${id}"`
     );
     if (update.changes === 0) {
-      const error = {
-        type: "error",
-        message: "Database Error, please try again later",
-      };
-      return error;
+      throw new Error("Database Error, please try again later");
     }
     //Informa a atualização
     const sucess = {
@@ -429,11 +357,7 @@ class Device {
     );
 
     if (!routerDevice || !movedDevice) {
-      const error = {
-        type: "error",
-        message: "Incorrect mac address",
-      };
-      return error;
+      throw new Error("Incorrect mac address");
     }
 
     let querryComponents = [];
@@ -461,11 +385,7 @@ class Device {
     );
 
     if (insertions.changes === 0) {
-      const error = {
-        type: "error",
-        message: "Database error, try later",
-      };
-      return error;
+      throw new Error("Database error, try later");
     }
 
     const sucess = {
@@ -480,32 +400,20 @@ class Device {
     // Pegando a instancia do db
     const db = await this.db;
     if (!id) {
-      const error = {
-        type: "error",
-        message: "Any id provided",
-      };
-      return error;
+      throw new Error("Any id provided");
     }
 
     const rowsId = await db.get(`SELECT * \ FROM device \ WHERE id = "${id}"`);
 
     if (!rowsId) {
-      const error = {
-        type: "error",
-        message: "Device not found",
-      };
-      return error;
+      throw new Error("Device not found");
     }
 
     //Efetua a deleção
     const deletedDevice = await db.run(`DELETE FROM device WHERE id="${id}"`);
     //Verifica se a chamada para o DB ocorreu sem problemas
     if (deletedDevice.changes == 0) {
-      const error = {
-        type: "error",
-        message: "Database Error, please try again later",
-      };
-      return error;
+      throw new Error("Database Error, please try again later");
     }
     //Mostra a validação de que o usuário foi deletado
     const sucess = {
@@ -524,11 +432,7 @@ class Device {
     );
 
     if (!device) {
-      const error = {
-        typer: "error",
-        message: "Dispositivo não se encontra na fila",
-      };
-      return error;
+      throw new Error("Dispositivo não se encontra na fila");
     }
 
     const insertions = await db.run(
@@ -536,39 +440,30 @@ class Device {
     );
 
     if (!insertions.changes) {
-      const error = {
-        type: "error",
-        message: "Database error, try later",
-      };
-      return error;
+      throw new Error("Database error, try later");
     }
   }
 
   async sendDevice(mac_address) {
     var client = mqtt.connect(options);
 
-    client.on('connect', () => {
+    client.on("connect", () => {
       console.log("Foi");
-    })
+    });
 
     if (client) {
-      client.publish('BUZZER', `{ "mac_address": "${mac_address}" }`);
+      client.publish("BUZZER", `{ "mac_address": "${mac_address}" }`);
     }
     if (!client) {
-      return "Error";
+      throw new Error("Error");
     }
   }
   async bateryDevice(mac_address, batery) {
-
     const update = await db.run(
       `UPDATE device \ SET  bateria = ${batery} \ WHERE mac_address="${mac_address}"`
     );
     if (update.changes === 0) {
-      const error = {
-        type: "error",
-        message: "Database Error, please try again later",
-      };
-      return error;
+      throw new Error("Database Error, please try again later");
     }
     //Informa a atualização
     const sucess = {

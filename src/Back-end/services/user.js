@@ -1,6 +1,5 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const dbInstance = require("../database");
 require("dotenv").config();
 const sqlite3 = require("sqlite3");
 const { open } = require("sqlite");
@@ -27,15 +26,10 @@ class User {
     );
 
     if (rowsEmailUser[0]) {
-      const error = {
-        type: "error",
-        message: "Usuário já existente com esse email",
-      };
-      return error;
+      throw new Error("Usuário já existente com esse email");
     }
 
     // Encriptando a senha do usuário caso ele tenha passado a senha
-
     const hashedPassword = await bcrypt.hash(this.password, 8);
     this.password = hashedPassword;
 
@@ -47,11 +41,7 @@ class User {
 
     // Checando se todas as informações foram inseridas no db
     if (inserction.changes === 0) {
-      const error = {
-        type: "error",
-        message: "Database error",
-      };
-      return error;
+      throw new Error("Database error");
     }
 
     const sucess = {
@@ -72,23 +62,13 @@ class User {
       `SELECT * \ FROM users \ WHERE email='${emailAuth}'`
     );
 
-    console.log(user);
-
     if (!user) {
-      const error = {
-        type: "error",
-        message: "User does't exists",
-      };
-      return error;
+      throw new Error("User does't exists");
     }
 
     let passwordMatch = await bcrypt.compare(passwordAuth, user.senha);
     if (!passwordMatch) {
-      const error = {
-        type: "error",
-        message: "Invalid password",
-      };
-      return error;
+      throw new Error("Invalid password");
     }
     token = await jwt.sign(
       {
@@ -116,11 +96,7 @@ class User {
     );
 
     if (!userInfo) {
-      const error = {
-        type: "error",
-        message: "Nothing found for this user",
-      };
-      return error;
+      throw new Error("Nothing found for this user");
     }
 
     const sucess = {
@@ -138,11 +114,7 @@ class User {
     const userInfo = await db.all(`SELECT * \ FROM users \ ORDER BY id DESC`);
 
     if (!userInfo) {
-      const error = {
-        type: "error",
-        message: "Nothing found for this user",
-      };
-      return error;
+      throw new Error("Nothing found for this user");
     }
 
     const sucess = {
@@ -160,21 +132,13 @@ class User {
     let queryComponent = [];
 
     if (!userId) {
-      const error = {
-        type: "error",
-        message: "Invalid user",
-      };
-      return error;
+      throw new Error("Invalid user");
     }
 
     const user = await db.get(`SELECT * \ FROM users \ WHERE id = "${userId}"`);
 
     if (!user) {
-      const error = {
-        type: "error",
-        message: "Nothing in the database from this user",
-      };
-      return error;
+      throw new Error("Nothing in the database from this user");
     }
 
     if (nome) {
@@ -191,11 +155,7 @@ class User {
     }
 
     if (!nome && !setor && !cargo && !email) {
-      const error = {
-        type: "error",
-        message: "Nothing to update",
-      };
-      return error;
+      throw new Error("Nothing to update");
     }
 
     const queryJoined = queryComponent.join(",");
@@ -204,11 +164,7 @@ class User {
       `UPDATE users SET ${queryJoined} WHERE id="${userId}"`
     );
     if (update.changes === 0) {
-      const error = {
-        type: "error",
-        message: "Database Error, please try again later",
-      };
-      return error;
+      throw new Error("Database Error, please try again late");
     }
     //Informa a atualização
     const sucess = {
@@ -236,11 +192,7 @@ class User {
       `UPDATE users SET ${queryJoined} WHERE id="${userId}"`
     );
     if (update.changes === 0) {
-      const error = {
-        type: "error",
-        message: "Database Error, please try again later",
-      };
-      return error;
+      throw new Error("Database Error, please try again later");
     }
     //Informa a atualização
     const sucess = {
@@ -256,11 +208,7 @@ class User {
     const db = await this.db;
 
     if (!userId) {
-      const error = {
-        type: "error",
-        message: "Invalid user",
-      };
-      return error;
+      throw new Error("Invalid user");
     }
 
     const rowsId = await db.get(
@@ -270,22 +218,14 @@ class User {
     console.log(rowsId);
 
     if (!rowsId) {
-      const error = {
-        type: "error",
-        message: "User not found",
-      };
-      return error;
+      throw new Error("User not found");
     }
 
     //Efetua a deleção
     const deletedUser = await db.run(`DELETE FROM users WHERE id="${userId}"`);
     //Verifica se a chamada para o DB ocorreu sem problemas
     if (deletedUser.changes == 0) {
-      const error = {
-        type: "error",
-        message: "Database Error, please try again later",
-      };
-      return error;
+      throw new Error("Database Error, please try again later");
     }
     //Mostra a validação de que o usuário foi deletado
     const sucess = {
@@ -304,22 +244,14 @@ class User {
       `SELECT * \ FROM users \ WHERE id = "${userId}"`
     );
     if (!rowsId) {
-      const error = {
-        type: "error",
-        message: "User not found",
-      };
-      return error;
+      throw new Error("User not found");
     }
 
     //Efetua a deleção
     const deletedUser = await db.run(`DELETE FROM users WHERE id="${userId}"`);
     //Verifica se a chamada para o DB ocorreu sem problemas
     if (deletedUser.changes == 0) {
-      const error = {
-        type: "error",
-        message: "Database Error, please try again later",
-      };
-      return error;
+      throw new Error("Database Error, please try again later");
     }
     //Mostra a validação de que o usuário foi deletado
     const sucess = {

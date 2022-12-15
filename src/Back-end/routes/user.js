@@ -1,14 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const { body, validationResult } = require("express-validator");
+const { body } = require("express-validator");
 
 //Importações necessárias
 const userController = require("../controllers/user");
-const {
-  verifyToken,
-  verifyAdmin,
-  verifyDevice,
-} = require("../middlewares/auth");
+const { verifyToken, verifyAdmin } = require("../middlewares/auth");
 
 //ROTAS com seus respectivos controllers e middlewares
 
