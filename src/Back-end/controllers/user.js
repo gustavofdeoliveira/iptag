@@ -14,17 +14,18 @@ const createUser = (req, res) => {
     });
   }
 
-  try {
-    user.createUser().then((resul) => {
-      res.status(200).json({
+  user.createUser().then((resul) => {
+    res
+      .status(200)
+      .json({
         message: resul.message,
+      })
+      .catch((err) => {
+        res.status(500).json({
+          error: err.message,
+        });
       });
-    });
-  } catch (err) {
-    res.status(500).json({
-      error: err.message,
-    });
-  }
+  });
 };
 
 const login = (req, res) => {
@@ -40,18 +41,19 @@ const login = (req, res) => {
 
   const user = new service.User();
 
-  try {
-    user.login(email, senha).then((resul) => {
+  user
+    .login(email, senha)
+    .then((resul) => {
       res.status(200).json({
         message: resul.message,
         token: resul.token,
       });
+    })
+    .catch((err) => {
+      res.status(400).json({
+        error: err.message,
+      });
     });
-  } catch (err) {
-    res.status(400).json({
-      error: err.message,
-    });
-  }
 };
 
 const getUser = (req, res) => {
@@ -59,33 +61,35 @@ const getUser = (req, res) => {
 
   const user = new service.User();
 
-  try {
-    user.getUser(userId).then((resul) => {
+  user
+    .getUser(userId)
+    .then((resul) => {
       res.status(200).json({
         message: resul.message,
       });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error: err.message,
+      });
     });
-  } catch (err) {
-    res.status(500).json({
-      error: err.message,
-    });
-  }
 };
 
 const getUsers = (req, res) => {
   const user = new service.User();
 
-  try {
-    user.getUsers().then((resul) => {
+  user
+    .getUsers()
+    .then((resul) => {
       res.status(200).json({
         message: resul.message,
       });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error: err.message,
+      });
     });
-  } catch (err) {
-    res.status(500).json({
-      error: err.message,
-    });
-  }
 };
 
 const updateUser = (req, res) => {
@@ -94,17 +98,18 @@ const updateUser = (req, res) => {
 
   const user = new service.User();
 
-  try {
-    user.editUser(userId, nome, setor, cargo, email).then((resul) => {
+  user
+    .editUser(userId, nome, setor, cargo, email)
+    .then((resul) => {
       res.status(200).json({
         message: resul.message,
       });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error: err.message,
+      });
     });
-  } catch (err) {
-    res.status(500).json({
-      error: err.message,
-    });
-  }
 };
 
 const updateUserAdmin = (req, res) => {
@@ -112,17 +117,18 @@ const updateUserAdmin = (req, res) => {
 
   const user = new service.User();
 
-  try {
-    user.editUserAdmin(is_admin, userId).then((resul) => {
+  user
+    .editUserAdmin(is_admin, userId)
+    .then((resul) => {
       res.status(200).json({
         message: resul.message,
       });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error: err.message,
+      });
     });
-  } catch (err) {
-    res.status(500).json({
-      error: err.message,
-    });
-  }
 };
 
 const deleteUser = (req, res) => {
@@ -130,17 +136,18 @@ const deleteUser = (req, res) => {
 
   const user = new service.User();
 
-  try {
-    user.deleteUser(userId).then((resul) => {
+  user
+    .deleteUser(userId)
+    .then((resul) => {
       res.status(200).json({
         message: resul.message,
       });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error: err.message,
+      });
     });
-  } catch (err) {
-    res.status(500).json({
-      error: err.message,
-    });
-  }
 };
 
 const deleteUserAdmin = (req, res) => {
@@ -156,17 +163,18 @@ const deleteUserAdmin = (req, res) => {
 
   const user = new service.User();
 
-  try {
-    user.deleteUserAdmin(id).then((resul) => {
+  user
+    .deleteUserAdmin(id)
+    .then((resul) => {
       res.status(200).json({
         message: resul.message,
       });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error: err.message,
+      });
     });
-  } catch (err) {
-    res.status(500).json({
-      error: err.message,
-    });
-  }
 };
 
 module.exports = {

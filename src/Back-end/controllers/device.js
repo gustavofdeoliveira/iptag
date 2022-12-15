@@ -15,17 +15,18 @@ const cadastroDevice = (req, res) => {
 
   const device = new service.Device();
 
-  try {
-    device.cadastroDevice(nome, mac_address).then((resul) => {
+  device
+    .cadastroDevice(nome, mac_address)
+    .then((resul) => {
       res.status(200).json({
         message: resul.message,
       });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error: err.message,
+      });
     });
-  } catch (err) {
-    res.status(500).json({
-      error: err.message,
-    });
-  }
 };
 
 const createDevice = (req, res) => {
@@ -59,33 +60,35 @@ const createDevice = (req, res) => {
     });
   }
 
-  try {
-    device.createDevice(id_cadastro).then((resul) => {
+  device
+    .createDevice(id_cadastro)
+    .then((resul) => {
       res.status(200).json({
         message: resul.message,
       });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error: err.message,
+      });
     });
-  } catch (err) {
-    res.status(500).json({
-      error: err.message,
-    });
-  }
 };
 
 const getAllDevicesCadastro = (req, res) => {
   const device = new service.Device();
 
-  try {
-    device.getAllDevicesCadastro().then((resul) => {
+  device
+    .getAllDevicesCadastro()
+    .then((resul) => {
       res.status(200).json({
         message: resul.message,
       });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error: err.message,
+      });
     });
-  } catch (err) {
-    res.status(500).json({
-      error: err.message,
-    });
-  }
 };
 
 const getDevice = (req, res) => {
@@ -93,33 +96,35 @@ const getDevice = (req, res) => {
 
   const device = new service.Device();
 
-  try {
-    device.getDevice(nome, apelido, id).then((resul) => {
+  device
+    .getDevice(nome, apelido, id)
+    .then((resul) => {
       res.status(200).json({
         message: resul.message,
       });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error: err.message,
+      });
     });
-  } catch (err) {
-    res.status(500).json({
-      error: err.message,
-    });
-  }
 };
 
 const getDevices = (req, res) => {
   const device = new service.Device();
 
-  try {
-    device.getDevices().then((resul) => {
+  device
+    .getDevices()
+    .then((resul) => {
       res.status(200).json({
         message: resul.message,
       });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error: err.message,
+      });
     });
-  } catch (err) {
-    res.status(500).json({
-      error: err.message,
-    });
-  }
 };
 
 const updateDevice = (req, res) => {
@@ -152,36 +157,35 @@ const updateDevice = (req, res) => {
 
   const device = new service.Device();
 
-  try {
-    device
-      .editDevice(
-        id,
-        nome,
-        apelido,
-        mac_address,
-        dt_instalacao,
-        origem_predio,
-        origem_sala,
-        setor_origem,
-        responsavel,
-        tipo,
-        status,
-        atual_predio,
-        atual_sala,
-        dt_rastreio,
-        hr_rastreio,
-        dt_atualizacao
-      )
-      .then((resul) => {
-        res.status(200).json({
-          message: resul.message,
-        });
+  device
+    .editDevice(
+      id,
+      nome,
+      apelido,
+      mac_address,
+      dt_instalacao,
+      origem_predio,
+      origem_sala,
+      setor_origem,
+      responsavel,
+      tipo,
+      status,
+      atual_predio,
+      atual_sala,
+      dt_rastreio,
+      hr_rastreio,
+      dt_atualizacao
+    )
+    .then((resul) => {
+      res.status(200).json({
+        message: resul.message,
       });
-  } catch (err) {
-    res.status(500).json({
-      error: err.message,
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error: err.message,
+      });
     });
-  }
 };
 
 const moveDevice = (req, res) => {
@@ -199,17 +203,18 @@ const moveDevice = (req, res) => {
 
   const device = new service.Device();
 
-  try {
-    device.moveDevice(mac_address_router, mac_address_moved).then((resul) => {
+  device
+    .moveDevice(mac_address_router, mac_address_moved)
+    .then((resul) => {
       res.status(200).json({
         message: resul.message,
       });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error: err.message,
+      });
     });
-  } catch (err) {
-    res.status(500).json({
-      error: err.message,
-    });
-  }
 };
 
 const deleteDevice = (req, res) => {
@@ -217,17 +222,18 @@ const deleteDevice = (req, res) => {
 
   const device = new service.Device();
 
-  try {
-    device.deleteDevice(id).then((resul) => {
+  device
+    .deleteDevice(id)
+    .then((resul) => {
       res.status(200).json({
         message: resul.message,
       });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error: err.message,
+      });
     });
-  } catch (err) {
-    res.status(500).json({
-      error: err.message,
-    });
-  }
 };
 
 const deleteCadastro = (req, res) => {
@@ -243,17 +249,18 @@ const deleteCadastro = (req, res) => {
 
   const device = new service.Device();
 
-  try {
-    device.deleteCadastro(id).then((resul) => {
+  device
+    .deleteCadastro(id)
+    .then((resul) => {
       res.status(200).json({
         message: resul.message,
       });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error: err.message,
+      });
     });
-  } catch (err) {
-    res.status(500).json({
-      error: err.message,
-    });
-  }
 };
 
 const sendDevice = (req, res) => {
@@ -261,17 +268,18 @@ const sendDevice = (req, res) => {
 
   const device = new service.Device();
 
-  try {
-    device.sendDevice(mac_address).then((resul) => {
+  device
+    .sendDevice(mac_address)
+    .then((resul) => {
       res.status(200).json({
         message: resul,
       });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error: err.message,
+      });
     });
-  } catch (err) {
-    res.status(500).json({
-      error: err.message,
-    });
-  }
 };
 
 const bateryDevice = (req, res) => {
@@ -279,17 +287,18 @@ const bateryDevice = (req, res) => {
 
   const device = new service.Device();
 
-  try {
-    device.bateryDevice(mac_address, batery).then((resul) => {
+  device
+    .bateryDevice(mac_address, batery)
+    .then((resul) => {
       res.status(200).json({
         message: resul,
       });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error: err.message,
+      });
     });
-  } catch (err) {
-    res.status(500).json({
-      error: err.message,
-    });
-  }
 };
 
 module.exports = {
