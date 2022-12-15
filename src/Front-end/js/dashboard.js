@@ -52,7 +52,7 @@ async function loadDevices() {
 
 function createGraphics(devices) {
   $("#total").html(devices.length);
-  debugger
+  
   totalPorcentagemOn = 0;
   totalPorcentagemOff = 0;
   totalOff = 0;

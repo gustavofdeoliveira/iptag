@@ -28,7 +28,6 @@ function updateUser() {
     document.getElementById("body-pd").style.display = "none";
     document.getElementById("body-pd").insertAdjacentHTML("beforebegin", '<div class="container-background" id="loader"><div class="loader"><div></div>');
     startTimer(3);
-    debugger;
     $.ajax({
         url: "http://localhost:3001/user/update",
         type: "PUT",

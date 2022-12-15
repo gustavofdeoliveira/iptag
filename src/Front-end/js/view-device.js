@@ -85,7 +85,6 @@ $("#play").click(function () {
       console.log(resul.message)
     },
     error: function (err) {
-      debugger
       console.log(err);
     }
   })

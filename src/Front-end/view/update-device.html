@@ -25,6 +25,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/sidebar.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
 
 
 </head>
@@ -99,16 +101,16 @@
                   </div>
                   <div class="col-sm-12 col-md-6 col-lg-4">
                     <div class="form-group">
-                      <input type="text" class="white-card-input" id="setor" aria-describedby="setor responsavel"
-                        placeholder="Setor do responsável*">
+                      <input type="text" class="white-card-input" id="mac_address" aria-describedby="Mac address"
+                        placeholder="Mac address*">
                     </div>
                   </div>
                   <div class="col-sm-12 col-md-6 col-lg-4">
 
-                    <select type="text" class="white-card-input" id="setor">
+                    <select type="text" class="white-card-input" id="tipo">
                       <option selected disabled>Tipo*</option>
-                      <option id="option">Acess point</option>
-                      <option id="option">Locator</option>
+                      <option value="Acess point" id="option">Acess point</option>
+                      <option value="Locator" id="option">Locator</option>
 
                     </select>
                   </div>
@@ -117,11 +119,11 @@
                   <div class="col-sm-12 ">
                     <div class="row justify-content-center">
                       <div class="col-sm-12 col-md-6 col-lg-3">
-                        <button class="btn-white-blue"><i class="fa fa-arrow-left" aria-hidden="true"></i>
+                        <button id="back" class="btn-white-blue"><i class="fa fa-arrow-left" aria-hidden="true"></i>
                           Voltar</button>
                       </div>
                       <div class="col-sm-12 col-md-6 col-lg-3">
-                        <button class="btn-blue"><i class="fa fa-floppy-o" aria-hidden="true"></i> Salvar</button>
+                        <button id="save" class="btn-blue"><i class="fa fa-floppy-o" aria-hidden="true"></i> Salvar</button>
                       </div>
                     </div>
                   </div>
@@ -149,6 +151,7 @@
   src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js'></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script type='text/javascript' src='../js/scripts.js'></script>
+<script type='text/javascript' src='../js/update-device.js'></script>
 
 
 </html>

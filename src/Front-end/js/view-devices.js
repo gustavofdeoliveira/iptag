@@ -11,12 +11,11 @@ async function loadDevices() {
   }).fail(function (err) {
     console.log(err.responseJSON.message)
   })
-  console.log(devices)
   listDevices(devices);
 }
 
 async function listDevices(devices) {
-  for (i = 0; i <= devices.length; i++) {
+  for (i = 0; i < devices.length; i++) {
     document.getElementById('list-devices').innerHTML += `
     <div class="col-sm-12 col-md-6 col-lg-3 mt-4">
               <div class="white-card align-items-center">

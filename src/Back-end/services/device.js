@@ -340,7 +340,7 @@ class Device {
 
     if (nome) {
       const device = await db.all(
-        `SELECT * \ FROM device \ WHERE nome = "${nome}"`
+        `SELECT * \ FROM device \ WHERE nome = "${nome}" AND id != "${id}"`
       );
       if (device[0]) {
         const error = {
