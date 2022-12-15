@@ -5,7 +5,6 @@ require("express-async-errors");
 
 const cadastroDevice = (req, res) => {
   const { nome, mac_address } = req.body;
-
   const device = new service.Device();
 
   device.cadastroDevice(nome, mac_address).then((resul) => {
@@ -268,7 +267,6 @@ const sendDevice = (req, res) => {
       });
     }
   });
-
 };
 
 const bateryDevice = (req, res) => {
@@ -301,5 +299,5 @@ module.exports = {
   deleteCadastro,
   moveDevice,
   sendDevice,
-  bateryDevice
+  bateryDevice,
 };

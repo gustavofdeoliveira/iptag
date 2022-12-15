@@ -75,7 +75,7 @@ async function createNavbar() {
                       <span class="nav_name">Dashboard</span>
                     </a>
           
-                    <a href="#" class="nav_link">
+                    <a href="notification.html" class="nav_link">
                       <i class='bx bx-bell nav_icon'></i>
                       <span class="nav_name">Notificações</span>
                     </a>
