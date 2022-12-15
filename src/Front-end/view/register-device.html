@@ -35,7 +35,7 @@
 <body style="display: flex;" id="body-pd">
 
   <!--Container Main start-->
-  <main class="contaner d-flex align-items-center">
+  <main class="contaner d-flex">
     <div class="col-sm-12">
       <div class="row mt-3">
         <h3>Cadastrar dispositivo</h3>
@@ -67,7 +67,7 @@
                   </div>
                   <div class="col-sm-12 col-md-6 col-lg-4">
                     <div class="form-group">
-                      <input type="date" class="white-card-input" id="data_instalação" aria-describedby="nome"
+                      <input type="date" class="white-card-input" id="data_instalação" aria-describedby="data_instalação"
                         placeholder="Data de instalação*">
                     </div>
                   </div>
@@ -93,27 +93,29 @@
                   </div>
                 </div>
                 <div class="row">
+                 
                   <div class="col-sm-12 col-md-6 col-lg-4">
                     <div class="form-group">
-                      <input type="text" class="white-card-input" id="mac" aria-describedby="Endereço MAC"
-                        placeholder="Endereço MAC*">
-                    </div>
-                  </div>
-                  <div class="col-sm-12 col-md-6 col-lg-4">
-                    <div class="form-group">
-                      <input type="text" class="white-card-input" id="setor_responsavel" aria-describedby="setor responsavel" placeholder="Setor do responsável*">
+                      <input type="text" class="white-card-input" id="responsavel" aria-describedby="responsavel responsavel" placeholder="Responsável*">
                     </div>
                   </div>
                   <div class="col-sm-12 col-md-6 col-lg-4">
 
                     <select type="text" class="white-card-input" id="tipo">
                       <option selected disabled>Tipo*</option>
-                      <option id="option">Acess point</option>
-                      <option id="option">Locator</option>
+                      <option value="Acess point">Acess point</option>
+                      <option value="Locator">Locator</option>
 
                     </select>
                   </div>
                 </div>
+                <div class="row justify-content-center mt-2">
+                  <div class="col-12">
+                      <div id="error">
+
+                      </div>
+                  </div>
+              </div>
                 <div class="row mt-4"><div class="col-sm-12" id="erros"></div></div>
                 <div class="row mt-4">
                   <div class="col-sm-12 ">
