@@ -1,16 +1,17 @@
 loadUsers();
-
+let Allusers;
 async function loadUsers() {
   await $.ajax({
     url: "http://localhost:3001/user/getUsers",
     headers: { Authorization: ` ${auth}` },
     success: function (resul) {
       users = resul.message;
+      Allusers = users;
+      listUsers(users);
     },
   }).fail(function (err) {
     console.log(err.responseJSON.message);
   });
-  listUsers(users);
 }
 
 async function listUsers(users) {
@@ -37,8 +38,6 @@ async function listUsers(users) {
         <div class="row justify-content-between align-items-center mt-4">
           <span class="white-card-time-device">2 min atrás</span>
           <div class="d-flex align-items-center w-max">
-            <a class="white-card-see-device" onclick="viewUser(${users[i].id})">Ver mais</a>
-            <img class="white-card-see-arrow-device" src="../images/arrow-right.png" alt="Ver mais">
             <a onclick="deleteUserModal(${users[i].id})" class="trash"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
           </div>
         </div>
@@ -101,4 +100,33 @@ async function deleteUser(userDelete) {
   }).fail(function (err) {
     console.log(err.responseJSON.message);
   });
+}
+
+function searchInput(valToSearch) {
+  if (valToSearch == "") {
+    document.getElementById("list-users").innerHTML = "";
+    document.getElementById("pagination").innerHTML = "";
+    loadUsers();
+  } else {
+    document.getElementById("list-users").innerHTML = "";
+    Allusers = Allusers.filter((val) => {
+      return val.nome.toLowerCase().includes(valToSearch.toLowerCase());
+    });
+
+    if (Allusers) {
+      document.getElementById("pagination").innerHTML = "";
+
+      listUsers(Allusers);
+    } else {
+      document.getElementById("pagination").innerHTML = "";
+      document.getElementById("list-users").innerHTML =
+        "<h1> Não dispositivo encontrado</h1>";
+    }
+  }
+}
+
+function selectNavbar(){
+  document.getElementById("dashboard").classList.remove("active");
+  document.getElementById("users").classList.add("active");
+
 }

@@ -31,5 +31,5 @@
 *.out
 *.app
 .DS_Store
-src/node_modules
-src/.env
+node_modules
+/.env

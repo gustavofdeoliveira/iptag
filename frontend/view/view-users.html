@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/sidebar.css">
-
+  <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 
 </head>
 
@@ -42,20 +42,20 @@
         <div class="col-sm-12 col-md-6 col-lg-4">
           <div class="form-group">
             <input type="text" class="white-card-input" id="id_nome" aria-describedby="nome"
-              placeholder="Buscar dispositivo por nome ou id">
+              placeholder="Buscar usuário por nome" onkeyup="searchInput(this.value)">
           </div>
         </div>
       </div>
       <div class="row mt-4">
         <div class="col-sm-12 col-md-6 col-lg-3">
-          <button class="btn-blue d-flex justify-content-center align-items-center"><i class="fa fa-plus-circle" aria-hidden="true"></i>Adicionar</button>
+          <a href="register-user.html" class="btn-blue d-flex justify-content-center align-items-center"><i class="fa fa-plus-circle" aria-hidden="true"></i>Adicionar</a>
         </div>
       </div>
       <div class="row mt-4 align-items-center justify-content-between">
         <div class="col-sm-12 col-md-6 col-lg-8">
           <h4>Todos os dispositivos</h4>
         </div>
-        <div class="col-sm-12 col-md-6 col-lg-2">
+        <!-- <div class="col-sm-12 col-md-6 col-lg-2">
 
           <select type="text" class="white-card-input" id="setor">
             <option id="recente" selected>Recente</option>
@@ -64,7 +64,7 @@
             <option id="z-a">Alfabetica: Z-A</option>
 
           </select>
-        </div>
+        </div> -->
       </div>
       <div class="row mt-4">
         <div class="col-sm-12 col-md-12 col-lg-12">
@@ -75,7 +75,7 @@
 
       </div>
    
-      <div class="row mt-4">
+      <div class="row mt-4" id="pagination">
         <div class="d-flex align-items-center justify-content-center">
           <a href="#"><img class="arrows-pagination" src="../images/arrow-left.png" alt="anterior"> </a>
           <a href="#" class="numbers-pagination selected">1</a>
@@ -95,5 +95,6 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script type='text/javascript' src='../js/scripts.js'></script>
-<script src="../js/view-users.js"></script>
+
+<script type='text/javascript' src="../js/view-users.js"></script>
 </html>
