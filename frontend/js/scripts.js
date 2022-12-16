@@ -42,7 +42,7 @@ function Logout() {
 
 async function createNavbar() {
   await $.ajax({
-    url: "http://localhost:3001/user/get",
+    url: "https://iptag.herokuapp.com/user/get",
     headers: { Authorization: ` ${auth}` },
     success: function (resul) {
       user = resul.message;
@@ -115,7 +115,7 @@ async function createNavbar() {
     document.getElementById("body-pd").style.paddingLeft = 0;
   });
   await $.ajax({
-    url: "http://localhost:3001/device/getCadastro",
+    url: "https://iptag.herokuapp.com/device/getCadastro",
     headers: { Authorization: ` ${auth}` },
     success: function (resul) {
       cadastro = resul.message;

@@ -7,7 +7,7 @@ pressEnter.addEventListener("keydown", function (e) {
 
 function verifyLogin() {    
     if ($("#email").val() && $("#senha").val()) {
-        $.post("http://localhost:3001/user/login",
+        $.post("https://iptag.herokuapp.com/user/login",
             {
                 "email": $("#email").val(),
                 "senha": $("#senha").val()

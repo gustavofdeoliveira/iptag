@@ -3,7 +3,7 @@ let Alldevices;
 
 function loadDevices() {
   $.ajax({
-    url: "http://localhost:3001/device/getDevices",
+    url: "https://iptag.herokuapp.com/device/getDevices",
     headers: { Authorization: ` ${auth}` },
     success: function (resul) {
       devices = resul.message;

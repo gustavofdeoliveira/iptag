@@ -22,7 +22,7 @@ function verifyCreate() {
     $("#senha").val()
   ) {
     $.ajax({
-      url: "http://localhost:3001/user/create",
+      url: "https://iptag.herokuapp.com/user/create",
       type: "POST",
       headers: { Authorization: ` ${auth}` },
       data: {

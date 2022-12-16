@@ -3,7 +3,7 @@ deviceId = params.get("id");
 loadDevice(deviceId);
 async function loadDevice(deviceId) {
   await $.ajax({
-    url: "http://localhost:3001/device/get",
+    url: "https://iptag.herokuapp.com/device/get",
     headers: { Authorization: ` ${auth}`, id: deviceId },
     success: function (resul) {
       device = resul.message[0];
@@ -84,7 +84,7 @@ $("#play").click(function () {
     );
   startTimer(3);
   $.ajax({
-    url: "http://localhost:3001/device/send",
+    url: "https://iptag.herokuapp.com/device/send",
     headers: { Authorization: ` ${auth}` },
     type: "POST",
     data: {

@@ -14,7 +14,7 @@ deviceId = params.get("id");
 loadDevice(deviceId);
 async function loadDevice(deviceId) {
   await $.ajax({
-    url: "http://localhost:3001/device/get",
+    url: "https://iptag.herokuapp.com/device/get",
     headers: { Authorization: ` ${auth}`, id: deviceId },
     success: function (resul) {
       device = resul.message[0];
@@ -90,7 +90,7 @@ function save() {
 }
 async function deleteDevice(deviceId) {
   await $.ajax({
-    url: "http://localhost:3001/device/delete",
+    url: "https://iptag.herokuapp.com/device/delete",
     type: "DELETE",
     headers: { Authorization: `${auth}` },
     data: { id: deviceId },

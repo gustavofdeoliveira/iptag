@@ -2,7 +2,7 @@ getUser();
 
 async function getUser() {
   await $.ajax({
-    url: "http://localhost:3001/user/get",
+    url: "https://iptag.herokuapp.com/user/get",
     headers: { Authorization: ` ${auth}` },
     success: function (resul) {
       user = resul.message;
@@ -34,7 +34,7 @@ function updateUser() {
     );
   startTimer(3);
   $.ajax({
-    url: "http://localhost:3001/user/update",
+    url: "https://iptag.herokuapp.com/user/update",
     type: "PUT",
     headers: { Authorization: ` ${auth}` },
     data: {

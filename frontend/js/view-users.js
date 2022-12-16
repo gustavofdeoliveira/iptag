@@ -2,7 +2,7 @@ loadUsers();
 let Allusers;
 async function loadUsers() {
   await $.ajax({
-    url: "http://localhost:3001/user/getUsers",
+    url: "https://iptag.herokuapp.com/user/getUsers",
     headers: { Authorization: ` ${auth}` },
     success: function (resul) {
       users = resul.message;
@@ -73,7 +73,7 @@ function viewUser(userId) {
 
 async function getUser(userId) {
   await $.ajax({
-    url: "http://localhost:3001/user/getUser",
+    url: "https://iptag.herokuapp.com/user/getUser",
     headers: { Authorization: ` ${auth}` },
     body: { userId: userId },
     success: function (resul) {
@@ -87,7 +87,7 @@ async function getUser(userId) {
 }
 async function deleteUser(userDelete) {
   await $.ajax({
-    url: "http://localhost:3001/user/deleteAdmin",
+    url: "https://iptag.herokuapp.com/user/deleteAdmin",
     type: "DELETE",
     headers: { Authorization: `${auth}` },
     data: {

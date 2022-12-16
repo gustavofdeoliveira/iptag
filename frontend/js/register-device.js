@@ -49,7 +49,7 @@ function saveDispositivo() {
   }
   if (!erros.length) {
     $.ajax({
-      url: "http://localhost:3001/device/create",
+      url: "https://iptag.herokuapp.com/device/create",
       type: "POST",
       headers: { Authorization: ` ${auth}` },
       data: {

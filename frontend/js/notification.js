@@ -1,7 +1,7 @@
 loadNotifications();
 async function loadNotifications() {
   await $.ajax({
-    url: "http://localhost:3001/device/getCadastro",
+    url: "https://iptag.herokuapp.com/device/getCadastro",
     headers: { Authorization: ` ${auth}` },
     success: function (resul) {
       devices = resul.message;
