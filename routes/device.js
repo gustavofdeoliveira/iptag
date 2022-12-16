@@ -36,6 +36,7 @@ router.post(
       checkFalsy: true,
     }),
   ],
+  verifyDevice,
   deviceController.cadastroDevice
 );
 // Rota para completar o cadastro de um dispositivo caso ele já esteja na fila de espera
@@ -99,6 +100,7 @@ router.post(
       "mac address do dispositivo que se moveu é necessário"
     ).exists({ checkFalsy: true }),
   ],
+  verifyDevice,
   deviceController.moveDevice
 );
 // Rota para pegar todos os dispositivos na fila de cadastro
